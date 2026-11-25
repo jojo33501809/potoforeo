@@ -9,7 +9,9 @@
 	"settings": {
 		"title": "Halden",
 		"tagline": "Energy intelligence for commercial buildings",
-		"seo": { "titleSeparator": "—" }
+		"seo": {
+			"titleSeparator": "—"
+		}
 	},
 	"blockTypes": [
 		{
@@ -23,23 +25,48 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
-						{ "slug": "primary_cta_label", "label": "Primary button text", "type": "string" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
+						{
+							"slug": "primary_cta_label",
+							"label": "Primary button text",
+							"type": "string"
+						},
 						{
 							"slug": "primary_cta_url",
 							"label": "Primary button link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
 						},
-						{ "slug": "secondary_cta_label", "label": "Secondary button text", "type": "string" },
+						{
+							"slug": "secondary_cta_label",
+							"label": "Secondary button text",
+							"type": "string"
+						},
 						{
 							"slug": "secondary_cta_url",
 							"label": "Secondary button link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
 						},
-						{ "slug": "image", "label": "Image", "type": "image" },
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						},
 						{
 							"slug": "image_caption",
 							"label": "Image caption (shown on the photo)",
@@ -54,7 +81,9 @@
 							"slug": "eyebrow_url",
 							"label": "Announcement link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$"
+							}
 						},
 						{
 							"slug": "centered",
@@ -66,7 +95,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -83,13 +114,22 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
 						{
 							"slug": "subheadline",
 							"label": "Second sentence (shown muted after the headline)",
 							"type": "text"
 						},
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
+						{
+							"slug": "eyebrow",
+							"label": "Label above headline",
+							"type": "string"
+						},
 						{
 							"slug": "features",
 							"label": "Features",
@@ -128,7 +168,12 @@
 											"trend"
 										]
 									},
-									{ "slug": "title", "label": "Title", "type": "string", "required": true },
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string",
+										"required": true
+									},
 									{
 										"slug": "description",
 										"label": "Description (leave a blank line between paragraphs)",
@@ -142,7 +187,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -179,9 +226,22 @@
 										"type": "text",
 										"required": true
 									},
-									{ "slug": "author", "label": "Author name", "type": "string", "required": true },
-									{ "slug": "role", "label": "Role or title", "type": "string" },
-									{ "slug": "company", "label": "Company", "type": "string" },
+									{
+										"slug": "author",
+										"label": "Author name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "role",
+										"label": "Role or title",
+										"type": "string"
+									},
+									{
+										"slug": "company",
+										"label": "Company",
+										"type": "string"
+									},
 									{
 										"slug": "avatar",
 										"label": "Avatar (initials show when empty)",
@@ -194,7 +254,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -211,7 +273,11 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
 						{
 							"slug": "plans",
 							"label": "Plans",
@@ -221,15 +287,33 @@
 								"minItems": 1,
 								"maxItems": 3,
 								"subFields": [
-									{ "slug": "name", "label": "Plan name", "type": "string", "required": true },
-									{ "slug": "price", "label": "Price", "type": "string", "required": true },
-									{ "slug": "period", "label": "Period", "type": "string" },
+									{
+										"slug": "name",
+										"label": "Plan name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "price",
+										"label": "Price",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "period",
+										"label": "Period",
+										"type": "string"
+									},
 									{
 										"slug": "description",
 										"label": "Description (leave a blank line between paragraphs)",
 										"type": "text"
 									},
-									{ "slug": "features", "label": "Features (one per line)", "type": "text" },
+									{
+										"slug": "features",
+										"label": "Features (one per line)",
+										"type": "text"
+									},
 									{
 										"slug": "cta_label",
 										"label": "Button text",
@@ -242,7 +326,11 @@
 										"type": "string",
 										"required": true
 									},
-									{ "slug": "highlighted", "label": "Highlight this plan", "type": "boolean" },
+									{
+										"slug": "highlighted",
+										"label": "Highlight this plan",
+										"type": "boolean"
+									},
 									{
 										"slug": "badge",
 										"label": "Badge text, for example Most popular",
@@ -255,7 +343,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -272,8 +362,16 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
 						{
 							"slug": "items",
 							"label": "Questions",
@@ -283,7 +381,12 @@
 								"minItems": 1,
 								"maxItems": 12,
 								"subFields": [
-									{ "slug": "question", "label": "Question", "type": "string", "required": true },
+									{
+										"slug": "question",
+										"label": "Question",
+										"type": "string",
+										"required": true
+									},
 									{
 										"slug": "answer",
 										"label": "Answer (leave a blank line between paragraphs)",
@@ -297,7 +400,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -328,8 +433,17 @@
 								"minItems": 1,
 								"maxItems": 24,
 								"subFields": [
-									{ "slug": "name", "label": "Company name", "type": "string", "required": true },
-									{ "slug": "logo", "label": "Logo", "type": "image" }
+									{
+										"slug": "name",
+										"label": "Company name",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "logo",
+										"label": "Logo",
+										"type": "image"
+									}
 								]
 							}
 						},
@@ -337,7 +451,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -354,22 +470,45 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "eyebrow",
+							"label": "Label above headline",
+							"type": "string"
+						},
 						{
 							"slug": "body",
 							"label": "Body (leave a blank line between paragraphs)",
 							"type": "text"
 						},
-						{ "slug": "points", "label": "Checklist (one item per line)", "type": "text" },
-						{ "slug": "cta_label", "label": "Link text", "type": "string" },
+						{
+							"slug": "points",
+							"label": "Checklist (one item per line)",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Link text",
+							"type": "string"
+						},
 						{
 							"slug": "cta_url",
 							"label": "Link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$"
+							}
 						},
-						{ "slug": "image", "label": "Image", "type": "image" },
+						{
+							"slug": "image",
+							"label": "Image",
+							"type": "image"
+						},
 						{
 							"slug": "image_caption",
 							"label": "Image caption (shown on the photo)",
@@ -385,7 +524,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -402,7 +543,11 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
 						{
 							"slug": "subheadline",
 							"label": "Second sentence (shown muted after the headline)",
@@ -417,8 +562,18 @@
 								"minItems": 1,
 								"maxItems": 6,
 								"subFields": [
-									{ "slug": "value", "label": "Value", "type": "string", "required": true },
-									{ "slug": "label", "label": "Label", "type": "string", "required": true }
+									{
+										"slug": "value",
+										"label": "Value",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "label",
+										"label": "Label",
+										"type": "string",
+										"required": true
+									}
 								]
 							}
 						},
@@ -426,7 +581,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -443,32 +600,55 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string",
+							"required": true
+						},
 						{
 							"slug": "body",
 							"label": "Body (leave a blank line between paragraphs)",
 							"type": "text"
 						},
-						{ "slug": "primary_cta_label", "label": "Primary button text", "type": "string" },
+						{
+							"slug": "primary_cta_label",
+							"label": "Primary button text",
+							"type": "string"
+						},
 						{
 							"slug": "primary_cta_url",
 							"label": "Primary button link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$"
+							}
 						},
-						{ "slug": "secondary_cta_label", "label": "Secondary button text", "type": "string" },
+						{
+							"slug": "secondary_cta_label",
+							"label": "Secondary button text",
+							"type": "string"
+						},
 						{
 							"slug": "secondary_cta_url",
 							"label": "Secondary button link (starts with /, https://, mailto:, tel: or #)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
+							"validation": {
+								"pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$"
+							}
 						},
-						{ "slug": "image", "label": "Background image", "type": "image" },
+						{
+							"slug": "image",
+							"label": "Background image",
+							"type": "image"
+						},
 						{
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -485,9 +665,21 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "eyebrow",
+							"label": "Label above headline",
+							"type": "string"
+						},
+						{
+							"slug": "subheadline",
+							"label": "Subheadline",
+							"type": "text"
+						},
 						{
 							"slug": "options",
 							"label": "Contact options",
@@ -502,9 +694,21 @@
 										"label": "Icon",
 										"type": "select",
 										"required": true,
-										"options": ["email", "support", "sales", "phone", "chat", "location"]
+										"options": [
+											"email",
+											"support",
+											"sales",
+											"phone",
+											"chat",
+											"location"
+										]
 									},
-									{ "slug": "title", "label": "Title", "type": "string", "required": true },
+									{
+										"slug": "title",
+										"label": "Title",
+										"type": "string",
+										"required": true
+									},
 									{
 										"slug": "description",
 										"label": "Description (leave a blank line between paragraphs)",
@@ -529,7 +733,9 @@
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -546,13 +752,24 @@
 				{
 					"version": 1,
 					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "body", "label": "Body", "type": "portableText", "required": true },
+						{
+							"slug": "headline",
+							"label": "Headline",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Body",
+							"type": "portableText",
+							"required": true
+						},
 						{
 							"slug": "anchor_id",
 							"label": "Section ID (lowercase, for links like /#pricing)",
 							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
 						}
 					]
 				}
@@ -565,7 +782,12 @@
 			"label": "Pages",
 			"labelSingular": "Page",
 			"urlPattern": "/{slug}",
-			"supports": ["drafts", "revisions", "preview", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
 			"fields": [
 				{
 					"slug": "title",
@@ -593,6 +815,88 @@
 						],
 						"maxItems": 20
 					}
+				}
+			]
+		},
+		{
+			"slug": "works",
+			"label": "Works",
+			"labelSingular": "Work",
+			"urlPattern": "/works/{slug}",
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "タイトル",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "summary",
+					"label": "概要文（1行）",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "category",
+					"label": "カテゴリ",
+					"type": "string"
+				},
+				{
+					"slug": "role",
+					"label": "担当領域",
+					"type": "string"
+				},
+				{
+					"slug": "deliverables",
+					"label": "主な成果物",
+					"type": "string"
+				},
+				{
+					"slug": "period",
+					"label": "制作期間",
+					"type": "string"
+				},
+				{
+					"slug": "tools",
+					"label": "使用ツール（カンマ区切り）",
+					"type": "string"
+				},
+				{
+					"slug": "featured",
+					"label": "ピックアップ表示",
+					"type": "boolean",
+					"defaultValue": false
+				},
+				{
+					"slug": "thumbnail",
+					"label": "サムネイル画像",
+					"type": "image"
+				},
+				{
+					"slug": "background",
+					"label": "背景と課題",
+					"type": "text"
+				},
+				{
+					"slug": "approach",
+					"label": "設計方針・アプローチ",
+					"type": "text"
+				},
+				{
+					"slug": "implementation",
+					"label": "実装の工夫（改行区切り）",
+					"type": "text"
+				},
+				{
+					"slug": "result",
+					"label": "成果と学び",
+					"type": "text"
 				}
 			]
 		}
@@ -639,28 +943,68 @@
 			"name": "footer_product",
 			"label": "Product",
 			"items": [
-				{ "type": "custom", "label": "Platform", "url": "/#platform" },
-				{ "type": "custom", "label": "Monitoring", "url": "/#monitoring" },
-				{ "type": "custom", "label": "Planning", "url": "/#planning" },
-				{ "type": "custom", "label": "Pricing", "url": "/pricing" }
+				{
+					"type": "custom",
+					"label": "Platform",
+					"url": "/#platform"
+				},
+				{
+					"type": "custom",
+					"label": "Monitoring",
+					"url": "/#monitoring"
+				},
+				{
+					"type": "custom",
+					"label": "Planning",
+					"url": "/#planning"
+				},
+				{
+					"type": "custom",
+					"label": "Pricing",
+					"url": "/pricing"
+				}
 			]
 		},
 		{
 			"name": "footer_company",
 			"label": "Company",
 			"items": [
-				{ "type": "custom", "label": "Customers", "url": "/#customers" },
-				{ "type": "custom", "label": "FAQ", "url": "/#faq" },
-				{ "type": "custom", "label": "Contact", "url": "/contact" }
+				{
+					"type": "custom",
+					"label": "Customers",
+					"url": "/#customers"
+				},
+				{
+					"type": "custom",
+					"label": "FAQ",
+					"url": "/#faq"
+				},
+				{
+					"type": "custom",
+					"label": "Contact",
+					"url": "/contact"
+				}
 			]
 		},
 		{
 			"name": "footer_support",
 			"label": "Support",
 			"items": [
-				{ "type": "custom", "label": "Talk to sales", "url": "mailto:sales@halden.example" },
-				{ "type": "custom", "label": "Support", "url": "mailto:support@halden.example" },
-				{ "type": "custom", "label": "Email us", "url": "mailto:hello@halden.example" }
+				{
+					"type": "custom",
+					"label": "Talk to sales",
+					"url": "mailto:sales@halden.example"
+				},
+				{
+					"type": "custom",
+					"label": "Support",
+					"url": "mailto:support@halden.example"
+				},
+				{
+					"type": "custom",
+					"label": "Email us",
+					"url": "mailto:hello@halden.example"
+				}
 			]
 		}
 	],
@@ -700,12 +1044,24 @@
 							"_key": "logos",
 							"headline": "Trusted by property, hospitality and campus teams",
 							"logos": [
-								{ "name": "Oakline" },
-								{ "name": "Arden Hotels" },
-								{ "name": "Calder" },
-								{ "name": "Westmere" },
-								{ "name": "Kestrel" },
-								{ "name": "Northfield" }
+								{
+									"name": "Oakline"
+								},
+								{
+									"name": "Arden Hotels"
+								},
+								{
+									"name": "Calder"
+								},
+								{
+									"name": "Westmere"
+								},
+								{
+									"name": "Kestrel"
+								},
+								{
+									"name": "Northfield"
+								}
 							]
 						},
 						{
@@ -797,10 +1153,22 @@
 							"headline": "What customers see in their first year.",
 							"subheadline": "Measured across 4,800 connected buildings.",
 							"stats": [
-								{ "value": "23%", "label": "Lower energy spend, on average" },
-								{ "value": "4,800", "label": "Buildings connected across 14 countries" },
-								{ "value": "9 mo", "label": "Average payback period" },
-								{ "value": "99.98%", "label": "Data uptime over the last 12 months" }
+								{
+									"value": "23%",
+									"label": "Lower energy spend, on average"
+								},
+								{
+									"value": "4,800",
+									"label": "Buildings connected across 14 countries"
+								},
+								{
+									"value": "9 mo",
+									"label": "Average payback period"
+								},
+								{
+									"value": "99.98%",
+									"label": "Data uptime over the last 12 months"
+								}
 							]
 						},
 						{
@@ -1014,6 +1382,27 @@
 							]
 						}
 					]
+				}
+			}
+		],
+		"works": [
+			{
+				"id": "sample-work-1",
+				"slug": "sample-work-1",
+				"status": "published",
+				"data": {
+					"title": "サンプル制作実績",
+					"summary": "管理画面から編集できるテスト用の制作実績です。",
+					"category": "Web / Frontend",
+					"role": "フロントエンド実装・CMS構築",
+					"deliverables": "Webサイト / CMS管理画面",
+					"period": "2026年",
+					"tools": "Astro, EmDash, TypeScript",
+					"featured": true,
+					"background": "制作実績をコード直書きではなく管理画面から更新できるようにしたいという課題がありました。",
+					"approach": "AstroとEmDashを連携させ、記事やメタ情報を管理画面で完結できる構成にしました。",
+					"implementation": "コレクションスキーマを定義して入力項目を整理\n管理画面からの公開・編集フローを構築",
+					"result": "コードを変更せずに実績の追加や文言修正ができるようになりました。"
 				}
 			}
 		]

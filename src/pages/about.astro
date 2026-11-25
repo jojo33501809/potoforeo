@@ -1,404 +1,707 @@
 ---
-import { Icon } from "astro-iconset/components";
-import Base from "../layouts/Base.astro";
-
 const skillGroups = [
 	{
-		category: "Frontend & UI",
+		group: "Production / 実務で日常的に使用",
 		items: [
-			{ name: "HTML / CSS", detail: "セマンティック設計、レスポンシブ実装、CSS設計" },
-			{ name: "JavaScript / TypeScript", detail: "UIインタラクション実装、イベント制御、デバッグ" },
-			{ name: "React / Astro", detail: "コンポーネント設計、テンプレート構築" },
-			{ name: "Figma", detail: "UI/UX設計、デザインカンプからの忠実な実装" },
+			{ name: "HTML / CSS", note: "セマンティック設計・レスポンシブ・アニメーション実装" },
+			{ name: "JavaScript", note: "DOM操作・非同期処理・インタラクション実装" },
+			{ name: "HubSpot CMS / HubL", note: "カスタムモジュール設計・fields.jsonによる運用基盤構築" },
+			{ name: "Node.js / GAS", note: "スプレッドシート連携・制作業務の自動化スクリプト開発" },
+			{ name: "Figma", note: "UI設計・コンポーネント整理・デザイン意図の汲み取り" },
 		],
 	},
 	{
-		category: "CMS & Automation",
+		group: "Exploring / 個人開発・検証で活用",
 		items: [
-			{ name: "HubSpot CMS (HubL / fields.json)", detail: "汎用LPテンプレート・カスタムモジュール開発" },
-			{ name: "WordPress", detail: "テーマカスタマイズ・運用改善" },
-			{ name: "Node.js / GAS", detail: "スプレッドシート連携・ファイル反映の業務自動化" },
-			{ name: "Git", detail: "ソースコード管理・チーム開発フロー" },
-		],
-	},
-	{
-		category: "Technical SEO / AEO & AI",
-		items: [
-			{ name: "SEO / AEO / GEO施策", detail: "JSON-LD構造化データ実装、Search Console分析" },
-			{ name: "生成AI活用開発", detail: "実装調査、コード生成、エラー原因分析、検証サイクル" },
+			{ name: "Astro / EmDash", note: "本ポートフォリオの設計・CMS連携・パフォーマンス最適化" },
+			{ name: "TypeScript / React", note: "型安全なフロントエンド開発・コンポーネント設計の学習" },
+			{ name: "JSON-LD / Technical SEO", note: "構造化データ設計・生成AI（AEO）を意識した情報設計" },
+			{ name: "Git / GitHub", note: "ブランチ運用・プルリクエストベースのチーム開発" },
 		],
 	},
 ];
 
-const experiences = [
+const timeline = [
 	{
-		period: "2025年5月 — 現在",
-		company: "アクセリア株式会社",
-		role: "フロントエンドコーダー（インターン・アルバイト）",
-		highlights: [
-			"HubSpot CMSを用いたLP・Webページ構築、再利用可能な汎用カスタムモジュールの開発",
-			"fields.jsonによる管理画面UIの操作性改善および非エンジニア向け運用フロー整備",
-			"Node.js・GASを活用したデータ連携および制作業務の効率化",
-			"B2B Webインフラ・セキュリティ領域におけるSEO / AEO / GEO施策、JSON-LD構造化データ実装",
+		period: "2025.05 - 現在",
+		role: "長期インターン / フロントエンド・CMS実装",
+		summary: "B2B企業のWebサイト・オウンドメディアの仕組み化と改善を担当。",
+		points: [
+			"HubSpot CMSの汎用LPテンプレートおよびカスタムモジュール群を設計・実装",
+			"Node.js・GASを活用したデータ連携・ファイル反映の自動化ツールを構築",
+			"SEO・AEOを見据えたJSON-LD構造化データの動的出力テンプレートを整備",
 		],
 	},
 	{
-		period: "2023年4月 — 現在",
-		company: "クリエイティブインサイト合同会社",
-		role: "テクニカルディレクター（アルバイトリーダー）",
-		highlights: [
-			"WebサイトのUI/UX設計およびフロントエンドコーディング",
-			"制作プロジェクトの進行ディレクション・品質管理",
-			"制作チームのマネジメントおよび新規メンバーの育成サポート",
+		period: "2023.04 - 現在",
+		role: "Web制作・UI/UX設計・ディレクション",
+		summary: "クライアント案件の設計から実装、チーム進行まで一貫して経験。",
+		points: [
+			"Figmaを用いたワイヤーフレーム・UI設計とレスポンシブ実装",
+			"制作メンバーへのタスク切り出し・コードレビュー・進行管理を担当",
+			"デザイン意図と実装コストのバランスを取り、納品後の運用しやすさまで提案",
 		],
+	},
+];
+
+const principles = [
+	{
+		num: "01",
+		title: "「作って終わり」にしない仕組み化",
+		desc: "目の前の1ページを実装するだけでなく、次に更新する人やチーム全体が迷わず運用できるモジュール設計・自動化を常に意識しています。",
+	},
+	{
+		num: "02",
+		title: "仮説と検証を高速に回す自走力",
+		desc: "未知の技術やエラーに直面した際は、公式ドキュメントと生成AIを併用して原因を切り分け、小さく動くプロトタイプを作って検証します。",
+	},
+	{
+		num: "03",
+		title: "デザインとエンジニアリングの橋渡し",
+		desc: "UI設計とディレクションの経験を活かし、デザイナーの意図やユーザーの心地よさをコードで丁寧に再現することを大切にしています。",
 	},
 ];
 ---
 
-<Base title="About | 齋藤 条太郎">
-	<section class="about-hero container">
-		<div class="rise">
-			<span class="eyebrow">About Me</span>
-			<h1 class="about-title">齋藤 条太郎</h1>
-			<p class="about-subtitle">
-				サイバー大学 在学中（2028年3月卒業予定） / Frontend Engineer 志望
-			</p>
-			<p class="about-lead">
-				「見た目の実装」だけでなく「運用しやすさ」と「事業成果につながる導線設計」まで踏み込むフロントエンド開発を強みとしています。2社での長期実務を通じて培った技術力・ディレクション力・AI活用力を武器に、変化の速い環境で主体的にプロダクトを成長させるエンジニアを目指しています。
-			</p>
-		</div>
-	</section>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>About | 齋藤 条太郎</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<!-- スクロール進捗ライン -->
+		<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
-	<section class="section container">
-		<div class="bento-grid">
-			<article class="bento-card bento-card--wide">
-				<span class="bento-card__label">01. Career Experience / 実務経歴</span>
-				<h2 class="bento-card__title">フロントエンド実装とディレクションの両輪での実務経験</h2>
+		<!-- スモーキー背景 + 粒子ノイズ -->
+		<div class="ambient" aria-hidden="true">
+			<div class="ambient__blob ambient__blob--1"></div>
+			<div class="ambient__blob ambient__blob--2"></div>
+			<div class="ambient__grain"></div>
+		</div>
+
+		<!-- カスタムカーソル -->
+		<div class="ring-cursor" id="ring-cursor" aria-hidden="true">
+			<span class="ring-cursor__label" id="ring-cursor-label"></span>
+		</div>
+
+		<header class="site-header">
+			<a href="/" class="brand" data-cursor="Top">齋藤 条太郎</a>
+			<nav class="site-nav">
+				<a href="/" data-cursor="Index">01 Index</a>
+				<a href="/about" class="is-current" data-cursor="About">02 About</a>
+			</nav>
+		</header>
+
+		<main class="wrap">
+			<!-- Hero: ロード時の文字リビール -->
+			<section class="hero">
+				<span class="kicker hero-fade" style="--d: 0ms">Profile / 28卒 フロントエンドエンジニア志望</span>
+				<h1 class="title">
+					<span class="mask-line"><span class="mask-line__inner" style="--d: 80ms">齋藤 条太郎</span></span>
+				</h1>
+				<p class="lead hero-fade" style="--d: 180ms">
+					運用しやすい仕組みと、心地よいUI体験を実装するフロントエンドエンジニアを目指しています。
+					長期インターンや実務でのCMS設計・業務自動化・ディレクション経験を土台に、
+					設計意図を深く汲み取りプロダクトの価値を高める開発に取り組んでいます。
+				</p>
+			</section>
+
+			<!-- 01. 開発スタンス（時間差で下から浮き上がる） -->
+			<section class="sec">
+				<div class="sec-head" data-reveal="up">
+					<span class="kicker">01 / Engineering Principles</span>
+					<h2 class="sec-title">開発で大切にしていること</h2>
+				</div>
+				<div class="principle-grid">
+					{
+						principles.map((p, idx) => (
+							<div class="principle-card" data-reveal="up" style={`--d: ${idx * 100}ms`}>
+								<span class="p-num">{p.num}</span>
+								<h3>{p.title}</h3>
+								<p>{p.desc}</p>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- 02. 経歴（左からスライドイン） -->
+			<section class="sec">
+				<div class="sec-head" data-reveal="up">
+					<span class="kicker">02 / Experience</span>
+					<h2 class="sec-title">実務・インターン経験</h2>
+				</div>
 				<div class="timeline">
 					{
-						experiences.map((exp) => (
-							<div class="timeline-item">
-								<div class="timeline-item__head">
-									<span class="timeline-item__period">{exp.period}</span>
-									<h3 class="timeline-item__company">{exp.company}</h3>
-									<p class="timeline-item__role">{exp.role}</p>
+						timeline.map((item, idx) => (
+							<div class="tl-row" data-reveal="left" style={`--d: ${idx * 120}ms`}>
+								<span class="tl-period">{item.period}</span>
+								<div>
+									<h3>{item.role}</h3>
+									<p class="tl-summary">{item.summary}</p>
+									<ul class="tl-points">
+										{item.points.map((pt) => (
+											<li>{pt}</li>
+										))}
+									</ul>
 								</div>
-								<ul class="timeline-item__list">
-									{exp.highlights.map((point) => (
-										<li>{point}</li>
-									))}
-								</ul>
 							</div>
 						))
 					}
 				</div>
-			</article>
+			</section>
 
-			<article class="bento-card">
-				<span class="bento-card__label">02. Work Style / 仕事のスタイル</span>
-				<h2 class="bento-card__title">自走する検証サイクルと仕組み化</h2>
-				<div class="style-list">
-					<div class="style-item">
-						<h3>再現性のある設計</h3>
-						<p>
-							単発の実装で終わらせず、汎用モジュール化やヘルプテキスト整備など「誰が触っても崩れない設計」を心がけています。
-						</p>
-					</div>
-					<div class="style-item">
-						<h3>AI × 公式ドキュメントでの高速学習</h3>
-						<p>
-							未経験の技術領域でも、生成AIで仮説検証を行いながら一次情報（公式ドキュメント）で裏付けを取り、実環境で確実に形にします。
-						</p>
-					</div>
-					<div class="style-item">
-						<h3>技術とマーケティングの架け橋</h3>
-						<p>
-							テクニカルディレクターおよびAEO/SEO施策の経験から、エンジニア視点とビジネス・ユーザー視点の双方で会話できます。
-						</p>
-					</div>
+			<!-- 03. スキル習熟度別（行ごとに順番にフェードイン） -->
+			<section class="sec">
+				<div class="sec-head" data-reveal="up">
+					<span class="kicker">03 / Skills &amp; Stack</span>
+					<h2 class="sec-title">技術スタックと活用領域</h2>
 				</div>
-			</article>
-
-			<article class="bento-card bento-card--accent">
-				<span class="bento-card__label">03. Future Vision / 将来のビジョン</span>
-				<h2 class="bento-card__title">Webサービスの設計・開発・改善を一貫して担うエンジニアへ</h2>
-				<p class="bento-card__text">
-					AIによるコード生成が当たり前になる時代だからこそ、人間のエンジニアには「課題の定義」「UI/UXの細部の磨き込み」「適切な技術選定とアーキテクチャ設計」が求められると考えています。
-				</p>
-				<p class="bento-card__text">
-					今後はプログラミングの基礎とソフトウェア設計への理解をさらに深め、チーム開発の中でフロントエンドを軸にバックエンドやインフラ領域まで主体的に携われるエンジニアへ成長していきます。
-				</p>
-			</article>
-
-			<article class="bento-card bento-card--full">
-				<span class="bento-card__label">04. Skill Set / 技術スタック・対応領域</span>
-				<h2 class="bento-card__title">実務で使用している言語・ツール・知見</h2>
-				<div class="skills-columns">
+				<div class="skill-groups">
 					{
-						skillGroups.map((group) => (
-							<div class="skill-group">
-								<h3 class="skill-group__title">{group.category}</h3>
-								<ul class="skill-group__list">
-									{group.items.map((skill) => (
-										<li class="skill-row">
-											<span class="skill-row__name">{skill.name}</span>
-											<span class="skill-row__detail">{skill.detail}</span>
-										</li>
+						skillGroups.map((g) => (
+							<div class="skill-group" data-reveal="up">
+								<h3>{g.group}</h3>
+								<div class="skill-list">
+									{g.items.map((item, idx) => (
+										<div class="skill-row" data-reveal="up" style={`--d: ${idx * 55}ms`}>
+											<span class="skill-name">{item.name}</span>
+											<span class="skill-note">{item.note}</span>
+										</div>
 									))}
-								</ul>
+								</div>
 							</div>
 						))
 					}
 				</div>
-			</article>
+			</section>
 
-			<article class="bento-card bento-card--full education-card">
-				<div>
-					<span class="bento-card__label">05. Education / 学歴</span>
-					<ul class="edu-list">
-						<li>
-							<strong>サイバー大学</strong>
-							<span>2025年4月 — 2028年3月 卒業予定</span>
-						</li>
-						<li>
-							<strong>神奈川工科大学 電気電子情報学科</strong>
-							<span>2023年4月 — 2024年3月</span>
-						</li>
-					</ul>
-				</div>
-				<a href="/#works" class="btn btn-lg">
-					制作実績一覧へ戻る
-					<Icon name="ph:arrow-right" class="arrow" aria-hidden="true" />
-				</a>
-			</article>
-		</div>
-	</section>
-</Base>
+			<footer class="foot" data-reveal="up">
+				<a href="/" class="back-link" data-cursor="Back">← Indexへ戻る</a>
+				<span>© 2026 齋藤 条太郎</span>
+			</footer>
+		</main>
 
-<style>
-	.about-hero {
-		padding-block: clamp(64px, 10vw, 120px) clamp(32px, 5vw, 56px);
-	}
+		<script>
+			// 1. カスタムカーソル
+			const ring = document.getElementById("ring-cursor");
+			const ringLabel = document.getElementById("ring-cursor-label");
+			if (ring && window.matchMedia("(pointer: fine)").matches) {
+				let tx = window.innerWidth / 2;
+				let ty = window.innerHeight / 2;
+				let cx = tx;
+				let cy = ty;
 
-	.about-title {
-		margin-top: 12px;
-		font-size: clamp(36px, 5vw, 60px);
-		font-weight: 600;
-		letter-spacing: -0.02em;
-	}
+				document.addEventListener("mousemove", (e) => {
+					tx = e.clientX;
+					ty = e.clientY;
+					ring.classList.add("is-visible");
+				});
 
-	.about-subtitle {
-		margin-top: 12px;
-		font-size: 16px;
-		font-weight: 500;
-		color: var(--color-accent);
-	}
+				const tickCursor = () => {
+					cx += (tx - cx) * 0.15;
+					cy += (ty - cy) * 0.15;
+					ring.style.transform = `translate3d(${cx}px, ${cy}px, 0) translate(-50%, -50%)`;
+					requestAnimationFrame(tickCursor);
+				};
+				tickCursor();
 
-	.about-lead {
-		max-width: 68ch;
-		margin-top: 24px;
-		font-size: clamp(16px, 1.7vw, 18px);
-		line-height: 1.8;
-		color: var(--color-text-secondary);
-	}
+				document.querySelectorAll<HTMLElement>("[data-cursor], a").forEach((el) => {
+					el.addEventListener("mouseenter", () => {
+						ring.classList.add("is-hover");
+						if (ringLabel) ringLabel.textContent = el.dataset.cursor || "";
+					});
+					el.addEventListener("mouseleave", () => {
+						ring.classList.remove("is-hover");
+						if (ringLabel) ringLabel.textContent = "";
+					});
+				});
+			}
 
-	.bento-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 24px;
-	}
+			// 2. スクロール進捗バー
+			const progressBar = document.getElementById("scroll-progress");
+			const updateProgress = () => {
+				if (!progressBar) return;
+				const max = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+				const ratio = Math.min(Math.max(window.scrollY / max, 0), 1);
+				progressBar.style.transform = `scaleX(${ratio})`;
+			};
+			window.addEventListener("scroll", updateProgress, { passive: true });
+			updateProgress();
 
-	.bento-card {
-		padding: clamp(24px, 3.5vw, 40px);
-		border-radius: var(--radius-xl);
-		background: var(--color-surface);
-		box-shadow: var(--shadow-card);
-	}
+			// 3. スクロール連動リビール（安全に確実に表示される設計）
+			const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+			if ("IntersectionObserver" in window) {
+				revealTargets.forEach((el) => el.classList.add("is-ready"));
+				const io = new IntersectionObserver(
+					(entries, obs) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("is-in");
+								obs.unobserve(entry.target);
+							}
+						});
+					},
+					{ threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
+				);
+				revealTargets.forEach((el) => io.observe(el));
+			}
+		</script>
 
-	.bento-card--wide {
-		grid-row: span 2;
-	}
+		<style>
+			:root {
+				--bg: #111112;
+				--surface: rgba(255, 255, 255, 0.04);
+				--ink: #f0efe9;
+				--ink-2: rgba(240, 239, 233, 0.74);
+				--muted: rgba(240, 239, 233, 0.44);
+				--line: rgba(240, 239, 233, 0.14);
+				--ease: cubic-bezier(0.16, 1, 0.3, 1);
+			}
 
-	.bento-card--full {
-		grid-column: 1 / -1;
-	}
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
 
-	.bento-card--accent {
-		background: var(--glow-daylight), var(--color-sunken);
-		border: 1px solid var(--color-border);
-	}
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--ink);
+				font-family: "Inter", "Noto Sans JP", sans-serif;
+				-webkit-font-smoothing: antialiased;
+				overflow-x: hidden;
+			}
 
-	.bento-card__label {
-		display: inline-block;
-		font-size: 12.5px;
-		font-weight: 600;
-		letter-spacing: 0.02em;
-		color: var(--color-muted);
-	}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
 
-	.bento-card__title {
-		margin-top: 10px;
-		font-size: clamp(20px, 2.2vw, 26px);
-		font-weight: 600;
-		line-height: 1.35;
-	}
+			/* 進捗バー */
+			.scroll-progress {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 200;
+				width: 100%;
+				height: 2px;
+				background: var(--ink);
+				transform-origin: left center;
+				transform: scaleX(0);
+				will-change: transform;
+			}
 
-	.bento-card__text {
-		margin-top: 16px;
-		font-size: 15px;
-		line-height: 1.75;
-		color: var(--color-text-secondary);
-	}
+			/* 背景 */
+			.ambient {
+				position: fixed;
+				inset: 0;
+				z-index: 0;
+				pointer-events: none;
+				overflow: hidden;
+				background: radial-gradient(circle at 20% 80%, #26272b 0%, #121214 55%, #0c0c0d 100%);
+			}
 
-	.timeline {
-		display: grid;
-		gap: 32px;
-		margin-top: 28px;
-	}
+			.ambient__blob {
+				position: absolute;
+				border-radius: 50%;
+				filter: blur(120px);
+				opacity: 0.4;
+				animation: drift 22s ease-in-out infinite alternate;
+			}
 
-	.timeline-item {
-		padding-left: 20px;
-		border-left: 2px solid var(--color-border-strong);
-	}
+			.ambient__blob--1 {
+				width: 55vw;
+				height: 55vw;
+				right: -15vw;
+				top: -15vw;
+				background: radial-gradient(circle, rgba(160, 175, 200, 0.2), transparent 70%);
+			}
 
-	.timeline-item__period {
-		font-size: 13px;
-		font-weight: 500;
-		color: var(--color-accent);
-	}
+			.ambient__blob--2 {
+				width: 50vw;
+				height: 50vw;
+				left: -15vw;
+				bottom: -20vw;
+				background: radial-gradient(circle, rgba(215, 218, 224, 0.22), transparent 70%);
+				animation-duration: 28s;
+			}
 
-	.timeline-item__company {
-		margin-top: 4px;
-		font-size: 19px;
-		font-weight: 600;
-	}
+			@keyframes drift {
+				from {
+					transform: translate3d(0, 0, 0) scale(1);
+				}
+				to {
+					transform: translate3d(4vw, -4vh, 0) scale(1.08);
+				}
+			}
 
-	.timeline-item__role {
-		margin-top: 2px;
-		font-size: 14px;
-		color: var(--color-text-secondary);
-	}
+			.ambient__grain {
+				position: absolute;
+				inset: 0;
+				opacity: 0.08;
+				background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 0);
+				background-size: 3px 3px;
+			}
 
-	.timeline-item__list {
-		display: grid;
-		gap: 8px;
-		margin-top: 14px;
-	}
+			/* カスタムカーソル */
+			.ring-cursor {
+				position: fixed;
+				top: 0;
+				left: 0;
+				z-index: 900;
+				width: 44px;
+				height: 44px;
+				border-radius: 50%;
+				border: 1px solid rgba(240, 239, 233, 0.35);
+				pointer-events: none;
+				opacity: 0;
+				display: grid;
+				place-items: center;
+				transition:
+					width 260ms var(--ease),
+					height 260ms var(--ease),
+					background-color 260ms var(--ease),
+					opacity 220ms var(--ease);
+			}
 
-	.timeline-item__list li {
-		position: relative;
-		padding-left: 16px;
-		font-size: 14.5px;
-		line-height: 1.65;
-		color: var(--color-text-secondary);
-	}
+			.ring-cursor.is-visible {
+				opacity: 1;
+			}
 
-	.timeline-item__list li::before {
-		content: "";
-		position: absolute;
-		top: 0.65em;
-		left: 0;
-		width: 5px;
-		height: 5px;
-		border-radius: 50%;
-		background: var(--color-muted);
-	}
+			.ring-cursor.is-hover {
+				width: 72px;
+				height: 72px;
+				background: rgba(240, 239, 233, 0.1);
+				border-color: rgba(240, 239, 233, 0.75);
+			}
 
-	.style-list {
-		display: grid;
-		gap: 20px;
-		margin-top: 24px;
-	}
+			.ring-cursor__label {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 10px;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+			}
 
-	.style-item h3 {
-		font-size: 16.5px;
-		font-weight: 600;
-	}
+			/* ヘッダー */
+			.site-header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 20px clamp(20px, 4vw, 48px);
+				border-bottom: 1px solid var(--line);
+				background: rgba(17, 17, 18, 0.65);
+				backdrop-filter: blur(12px);
+			}
 
-	.style-item p {
-		margin-top: 6px;
-		font-size: 14px;
-		line-height: 1.7;
-		color: var(--color-text-secondary);
-	}
+			.brand {
+				font-family: "Noto Serif JP", serif;
+				font-size: 15px;
+				letter-spacing: 0.12em;
+			}
 
-	.skills-columns {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 28px;
-		margin-top: 28px;
-	}
+			.site-nav {
+				display: flex;
+				gap: 24px;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--ink-2);
+			}
 
-	.skill-group__title {
-		padding-bottom: 10px;
-		border-bottom: 1px solid var(--color-border);
-		font-size: 16px;
-		font-weight: 600;
-	}
+			.site-nav .is-current,
+			.site-nav a:hover {
+				color: var(--ink);
+			}
 
-	.skill-group__list {
-		display: grid;
-		gap: 16px;
-		margin-top: 16px;
-	}
+			/* Hero アニメーション */
+			.mask-line {
+				display: block;
+				overflow: hidden;
+				padding-bottom: 0.08em;
+			}
 
-	.skill-row {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-	}
+			.mask-line__inner {
+				display: block;
+				animation: slide-up-mask 900ms var(--ease) var(--d, 0ms) both;
+			}
 
-	.skill-row__name {
-		font-size: 14.5px;
-		font-weight: 600;
-		color: var(--color-text);
-	}
+			.hero-fade {
+				animation: fade-up 850ms var(--ease) var(--d, 0ms) both;
+			}
 
-	.skill-row__detail {
-		font-size: 13.5px;
-		line-height: 1.55;
-		color: var(--color-text-secondary);
-	}
+			@keyframes slide-up-mask {
+				from {
+					transform: translateY(105%);
+					opacity: 0;
+				}
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
 
-	.education-card {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: space-between;
-		gap: 24px;
-	}
+			@keyframes fade-up {
+				from {
+					transform: translateY(18px);
+					opacity: 0;
+				}
+				to {
+					transform: translateY(0);
+					opacity: 1;
+				}
+			}
 
-	.edu-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 24px 48px;
-		margin-top: 14px;
-	}
+			/* スクロールリビール */
+			[data-reveal].is-ready {
+				opacity: 0;
+				transition:
+					opacity 750ms var(--ease) var(--d, 0ms),
+					transform 750ms var(--ease) var(--d, 0ms);
+			}
 
-	.edu-list li {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-	}
+			[data-reveal="up"].is-ready {
+				transform: translateY(26px);
+			}
 
-	.edu-list strong {
-		font-size: 16px;
-		font-weight: 600;
-	}
+			[data-reveal="left"].is-ready {
+				transform: translateX(-28px);
+			}
 
-	.edu-list span {
-		font-size: 14px;
-		color: var(--color-text-secondary);
-	}
+			[data-reveal].is-in {
+				opacity: 1;
+				transform: translate3d(0, 0, 0);
+			}
 
-	@media (max-width: 960px) {
-		.bento-grid,
-		.skills-columns {
-			grid-template-columns: 1fr;
-		}
+			/* レイアウト */
+			.wrap {
+				position: relative;
+				z-index: 2;
+				width: min(980px, calc(100% - clamp(32px, 6vw, 96px)));
+				margin-inline: auto;
+				padding: 132px 0 88px;
+			}
 
-		.bento-card--wide {
-			grid-row: auto;
-		}
-	}
-</style>
+			.kicker {
+				display: inline-block;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				letter-spacing: 0.1em;
+				color: var(--muted);
+				text-transform: uppercase;
+			}
+
+			.title {
+				margin: 14px 0 0;
+				font-family: "Noto Serif JP", serif;
+				font-size: clamp(36px, 6vw, 64px);
+				font-weight: 500;
+				letter-spacing: 0.1em;
+			}
+
+			.lead {
+				max-width: 62ch;
+				margin: 24px 0 0;
+				font-size: 15.5px;
+				line-height: 1.95;
+				color: var(--ink-2);
+			}
+
+			.sec {
+				margin-top: 76px;
+				padding-top: 32px;
+				border-top: 1px solid var(--line);
+			}
+
+			.sec-title {
+				margin: 10px 0 0;
+				font-family: "Noto Serif JP", serif;
+				font-size: 24px;
+				font-weight: 500;
+			}
+
+			.principle-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 18px;
+				margin-top: 26px;
+			}
+
+			.principle-card {
+				padding: 24px;
+				border-radius: 14px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				transition:
+					transform 320ms var(--ease),
+					border-color 320ms var(--ease),
+					background-color 320ms var(--ease),
+					opacity 750ms var(--ease) var(--d, 0ms);
+			}
+
+			.principle-card:hover {
+				transform: translateY(-4px);
+				border-color: rgba(240, 239, 233, 0.34);
+				background: rgba(255, 255, 255, 0.065);
+			}
+
+			.p-num {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
+
+			.principle-card h3 {
+				margin: 10px 0 0;
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 1.45;
+			}
+
+			.principle-card p {
+				margin: 10px 0 0;
+				font-size: 13.5px;
+				line-height: 1.8;
+				color: var(--ink-2);
+			}
+
+			.timeline {
+				margin-top: 24px;
+			}
+
+			.tl-row {
+				display: grid;
+				grid-template-columns: 180px minmax(0, 1fr);
+				gap: 24px;
+				padding-block: 28px;
+				border-bottom: 1px solid var(--line);
+			}
+
+			.tl-period {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 12px;
+				color: var(--muted);
+			}
+
+			.tl-row h3 {
+				margin: 0;
+				font-size: 18px;
+				font-weight: 500;
+			}
+
+			.tl-summary {
+				margin: 8px 0 0;
+				font-size: 14px;
+				color: var(--ink-2);
+			}
+
+			.tl-points {
+				margin: 14px 0 0;
+				padding-left: 18px;
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+				font-size: 14px;
+				line-height: 1.75;
+				color: var(--ink-2);
+			}
+
+			.skill-groups {
+				display: flex;
+				flex-direction: column;
+				gap: 28px;
+				margin-top: 26px;
+			}
+
+			.skill-group {
+				padding: 24px 28px;
+				border-radius: 16px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+			}
+
+			.skill-group h3 {
+				margin: 0 0 16px;
+				font-family: "JetBrains Mono", "Noto Sans JP", monospace;
+				font-size: 13px;
+				font-weight: 500;
+				color: var(--muted);
+			}
+
+			.skill-list {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.skill-row {
+				display: grid;
+				grid-template-columns: 200px minmax(0, 1fr);
+				gap: 16px;
+				padding: 13px 0;
+				border-top: 1px solid var(--line);
+				font-size: 14px;
+				transition:
+					padding-left 280ms var(--ease),
+					background-color 280ms var(--ease),
+					opacity 750ms var(--ease) var(--d, 0ms),
+					transform 750ms var(--ease) var(--d, 0ms);
+			}
+
+			.skill-row:hover {
+				padding-left: 12px;
+				background: rgba(255, 255, 255, 0.03);
+			}
+
+			.skill-name {
+				font-family: "JetBrains Mono", monospace;
+				font-weight: 500;
+			}
+
+			.skill-note {
+				color: var(--ink-2);
+			}
+
+			.foot {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: 84px;
+				padding-top: 20px;
+				border-top: 1px solid var(--line);
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
+
+			.back-link {
+				color: var(--ink);
+				border-bottom: 1px solid var(--ink);
+				padding-bottom: 2px;
+			}
+
+			@media (max-width: 768px) {
+				.ring-cursor {
+					display: none;
+				}
+				.principle-grid,
+				.tl-row,
+				.skill-row {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</body>
+</html>

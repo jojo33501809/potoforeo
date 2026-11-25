@@ -8,16 +8,48 @@
   --color-muted: light-dark(#76736d, #8c8780);
   --color-accent: light-dark(#1d4ed8, #60a5fa);
 
+  --color-border: color-mix(in srgb, var(--color-text) 12%, transparent);
+  --color-border-strong: color-mix(in srgb, var(--color-text) 24%, transparent);
+  --color-brand: var(--color-text);
+  --color-on-brand: var(--color-bg);
+  --chip-bg: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  --chip-text: var(--color-text);
+  --glow-daylight: radial-gradient(ellipse 80% 60% at 85% 15%,
+      color-mix(in srgb, var(--color-accent) 9%, transparent),
+      transparent 70%);
+
   --font-size-display: clamp(44px, 6.8vw, 96px);
   --font-size-h2: clamp(32px, 3.8vw, 52px);
-  --section-space: clamp(88px, 10vw, 140px);
+  --section-space: clamp(96px, 11vw, 156px);
 
+  --radius-sm: 6px;
+  --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 18px;
   --radius-media: 20px;
+  --radius-sheet: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, var(--color-text) 6%, transparent);
+  --shadow-card: 0 1px 0 color-mix(in srgb, var(--color-text) 8%, transparent);
+  --shadow-card-hover: 0 18px 40px -16px color-mix(in srgb, var(--color-text) 14%, transparent);
+  --shadow-xl: 0 28px 60px -18px color-mix(in srgb, var(--color-text) 22%, transparent);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 180ms var(--ease-out);
   --transition-base: 320ms var(--ease-out);
   --transition-slow: 560ms var(--ease-out);
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }

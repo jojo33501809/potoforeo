@@ -1,6 +1,7 @@
 ---
-import { Icon } from "astro-iconset/components";
-import Base from "../../layouts/Base.astro";
+import { getCollection } from "emdash";
+
+const { slug } = Astro.params;
 
 interface WorkDetail {
 	slug: string;
@@ -8,474 +9,585 @@ interface WorkDetail {
 	summary: string;
 	category: string;
 	role: string;
-	deliverables: string;
 	period: string;
+	team: string;
 	tools: string[];
 	thumbnail: string;
+	highlights: { label: string; value: string }[];
 	background: string;
-	approach: string;
-	implementation: string[];
+	approach: string[];
 	result: string;
 }
 
-const works: WorkDetail[] = [
+const richWorks: WorkDetail[] = [
 	{
 		slug: "hubspot-modular-lp",
-		title: "HubSpot CMS 汎用LPテンプレート・カスタムモジュール開発",
-		summary: "非エンジニアの運用担当者でも管理画面から柔軟にページ構築・デザイン調整できる再利用可能なモジュール群を設計・実装。",
+		title: "HubSpot CMS 汎用LPテンプレート設計",
+		summary: "非エンジニアでも管理画面から柔軟にページ構築できる、再利用性と保守性を両立したカスタムモジュール群の設計・実装。",
 		category: "CMS / Architecture",
-		role: "Frontend Coder",
-		deliverables: "LPテンプレート / カスタムモジュール群 / 管理画面UI設計",
+		role: "Frontend Coder / CMS Architect",
 		period: "2025.05 - 現在",
+		team: "ディレクター1名 / デザイナー1名 / エンジニア1名（自身）",
 		tools: ["HubSpot CMS", "HubL", "JavaScript", "fields.json", "CSS"],
-		thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-		background: "従来はLPを新規作成するたびにエンジニアが個別でHTML/CSSを実装しており、公開までのリードタイムと保守コストが課題となっていました。マーケターや運用担当者がコードを触らずに安全にページを量産・更新できる仕組みが求められていました。",
-		approach: "複数案件で共通化できるUIパーツを洗い出し、HubSpot CMSのカスタムモジュールとしてコンポーネント化。非エンジニアが直感的に操作できるよう、fields.jsonによる設定項目のグループ化と管理画面内のヘルプテキスト設計に注力しました。",
-		implementation: [
-			"fields.jsonを活用し、ボタン種別・配色・角丸・余白を管理画面から安全に切り替えられるプロパティ設計を構築",
-			"画面幅や文字数の増減に応じてタイトルの折り返しやレイアウトが崩れないレスポンシブCSS設計",
-			"追従CTAやドロワーメニューなどのUI挙動におけるJavaScriptの初期化処理・イベント検知の不具合解消",
-			"テキスト入力時の改行コードや不要なHTMLタグ混入を防ぐHubL側のサニタイズ・表示ロジック実装",
+		thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80",
+		highlights: [
+			{ label: "Focus", value: "非エンジニアの運用負荷軽減" },
+			{ label: "Architecture", value: "fields.json による設定の抽象化" },
+			{ label: "Impact", value: "LP立ち上げ・修正の属人化を解消" },
 		],
-		result: "新規LPの立ち上げ工数を大幅に削減し、運用担当者のみでレイアウト調整や文言更新が完結する体制を実現。コンポーネントの再利用性と運用性を両立する設計力を培いました。",
+		background:
+			"新規LPの公開や文言・レイアウト変更のたびにエンジニアがHTML/CSSを直接修正する必要があり、マーケティング施策のスピードとエンジニアの工数双方にボトルネックが発生していました。単発のページ制作ではなく、誰でも安全に組み替えられる仕組み化が求められていました。",
+		approach: [
+			"よく使われるセクション（FV、特徴一覧、比較表、FAQ、CTAなど）を粒度ごとに分解し、再利用可能なカスタムモジュールとして設計。",
+			"fields.json 側で余白・背景トーン・カラム数・表示切替を制御できるようにしつつ、デザインが崩れないよう選択肢を適切に制限（ガードレール設計）。",
+			"HubLの条件分岐とループ処理を活用し、入力項目が空の場合は不要なDOMや余白が出力されないクリーンなマークアップを徹底。",
+		],
+		result:
+			"管理画面上でのドラッグ＆ドロップと項目入力だけで、ブランドガイドラインに沿ったLPを短時間で構築できる体制を実現しました。エンジニアは定常的な文言修正から解放され、機能改善や新規開発に集中できるようになりました。",
 	},
 	{
 		slug: "workflow-automation-gas-node",
-		title: "Node.js・GASを活用したCMSデータ連携および制作業務効率化",
-		summary: "スプレッドシートの設定データとWebページ情報の自動連携や、HubSpotへのファイル反映フローを構築し運用工数を削減。",
-		category: "Automation",
-		role: "Frontend / Tooling",
-		deliverables: "データ連携スクリプト / 自動反映CLIツール",
+		title: "Node.js・GASによる制作業務自動化",
+		summary: "スプレッドシートの設定データとWebページ情報の自動連携、およびHubSpotへのファイル反映フローを仕組み化。",
+		category: "Automation / Tooling",
+		role: "Frontend / Tooling Engineer",
 		period: "2025.08 - 現在",
-		tools: ["Node.js", "GAS", "JavaScript", "JSON", "Git"],
-		thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80",
-		background: "複数ページの設定データやアセットファイルをCMSへ手動で反映する作業が多く、更新漏れやヒューマンエラーの発生リスク、単純作業による工数圧迫が課題でした。",
-		approach: "運用チームが普段使い慣れているGoogleスプレッドシートをデータソースとし、GASとNode.jsを組み合わせてCMS側の設定データやファイルへ自動同期するパイプラインを設計しました。",
-		implementation: [
-			"GASを用いてスプレッドシート上のページ構成・メタ情報を構造化されたJSON形式へ自動変換・出力",
-			"Node.jsスクリプトによりローカル環境からHubSpot CMSへのファイル・テンプレート反映を自動化",
-			"Gitによるソースコード・設定ファイルのバージョン管理を導入し、変更履歴の追跡と安全なロールバックを実現",
+		team: "個人主導で提案・設計・実装",
+		tools: ["Node.js", "Google Apps Script", "JSON", "Git", "HubSpot CLI"],
+		thumbnail: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1400&q=80",
+		highlights: [
+			{ label: "Trigger", value: "手作業による転記・反映ミスの削減" },
+			{ label: "Stack", value: "GAS × Node.js × JSON パイプライン" },
+			{ label: "Impact", value: "定型作業の自動化と品質の均一化" },
 		],
-		result: "手作業による転記ミスをゼロにし、複数ページの同時更新や設定反映にかかる作業時間を大幅に短縮。フロントエンド実装だけでなく開発フロー全体の効率化に貢献しました。",
+		background:
+			"複数ページにまたがる設定情報の更新や、スプレッドシートで管理しているマスターデータのWeb反映を手作業で行っており、ヒューマンエラーや確認コストが積み上がっていました。",
+		approach: [
+			"スプレッドシートを「非エンジニアも触れる管理画面」と見立て、GASで入力データを構造化JSONへ自動変換・出力する仕組みを構築。",
+			"Node.jsスクリプト側でJSONのバリデーションと差分チェックを行い、問題がなければ所定のディレクトリへ出力・反映するフローを整備。",
+			"属人化を防ぐため、エラー時のメッセージ設計と手順書（README）までセットでドキュメント化。",
+		],
+		result:
+			"手作業による転記ミスがゼロになり、更新作業にかかる時間を大幅に短縮できました。日常の「少し面倒な作業」を技術で仕組み化する重要性を実務を通じて体感したプロジェクトです。",
 	},
 	{
 		slug: "b2b-aeo-structured-data",
-		title: "B2BメディアのSEO・AEO/GEO施策および構造化データ実装",
-		summary: "検索エンジン・生成AI検索双方での認知向上を目指し、JSON-LD実装・サイト内導線設計・オウンドメディア運用を推進。",
+		title: "B2Bメディア SEO・AEO構造化データ実装",
+		summary: "検索エンジンだけでなく生成AI（AEO）からの参照・引用も見据えた、JSON-LD構造化データ設計とテクニカルSEO改善。",
 		category: "AEO / Technical SEO",
-		role: "Web Improvement / AEO",
-		deliverables: "JSON-LD構造化データ / 内部導線改修 / オウンドメディア運用",
+		role: "Web Improvement / Frontend",
 		period: "2025.05 - 現在",
-		tools: ["JSON-LD", "HTML/CSS", "Search Console", "HubSpot"],
-		thumbnail: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80",
-		background: "B2BのWebインフラ・セキュリティ領域において、従来の検索エンジン対策（SEO）に加え、生成AIによる検索・回答（AEO/GEO）で自社の技術情報やサービスが正しく参照される状態をつくる必要がありました。",
-		approach: "コンテンツの企画・記事制作といったマーケティング視点と、HTMLのセマンティクス・構造化データ実装というフロントエンド技術視点の両面からサイト構造を改善しました。",
-		implementation: [
-			"FAQ・Article・Organizationなどのスキーマに対応したJSON-LD構造化データをテンプレートへ組み込み",
-			"Google Search Consoleのデータを分析し、検索意図に沿ったタイトル・見出し階層・内部リンク導線を再設計",
-			"オウンドメディア（note）の立ち上げおよび技術解説記事の企画・執筆・運用フローの構築",
+		team: "マーケターと連携して設計・実装",
+		tools: ["JSON-LD", "Schema.org", "Search Console", "HubSpot CMS", "HTML"],
+		thumbnail: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1400&q=80",
+		highlights: [
+			{ label: "Target", value: "検索エンジン + 生成AI（AEO）対応" },
+			{ label: "Implementation", value: "動的JSON-LDテンプレート化" },
+			{ label: "Verification", value: "Rich Results Test / Search Console" },
 		],
-		result: "技術的なマークアップ精度とコンテンツの網羅性を高めたことで、ターゲットキーワードでの検索流入とサイト内の回遊率を着実に向上させました。",
+		background:
+			"B2Bオウンドメディアにおいて、記事コンテンツの質は高いものの、検索エンジンや生成AIがページの意味構造（記事・FAQ・著者・組織情報など）を正確に解釈できるマークアップが不足していました。",
+		approach: [
+			"Article、FAQPage、BreadcrumbList、Organization などの Schema.org 仕様を整理し、HubSpotのテンプレートから自動でJSON-LDが生成されるよう実装。",
+			"見出し階層（h1〜h3）の適正化やセマンティックHTMLの見直しを並行して実施し、クローラビリティとアクセシビリティを底上げ。",
+			"Google Search Console とリッチリザルトテストを用いて継続的に検証し、警告・エラーを解消。",
+		],
+		result:
+			"新規記事を公開するだけで自動的に適切な構造化データが出力される基盤を整備。単なる「見た目の実装」にとどまらず、ビジネス成果（流入・認知）に直結するフロントエンド設計の視点を養いました。",
 	},
 	{
 		slug: "client-web-ui-direction",
-		title: "クライアントWebサイトのUI/UX設計・実装および進行管理",
+		title: "クライアントWebサイト UI/UX設計・進行管理",
 		summary: "Figmaを用いたUI設計からレスポンシブ実装、制作チームの進行ディレクション・メンバー育成まで一貫して担当。",
 		category: "UI/UX & Direction",
-		role: "Technical Director",
-		deliverables: "UIデザイン / フロントエンド実装 / 進行管理・育成",
+		role: "Technical Director / Frontend",
 		period: "2023.04 - 現在",
-		tools: ["Figma", "HTML/CSS", "JavaScript", "React", "WordPress"],
-		thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
-		background: "多様な業種のクライアントWeb制作において、デザインと実装の認識齟齬による手戻りや、チームメンバー間のスキル差による品質のばらつきが課題となっていました。",
-		approach: "Figma段階から実装のレスポンシブ挙動やコンポーネント構造を見据えたUI設計を行い、デザイナーと実装者の橋渡し役としてプロジェクト全体の進行と品質基準を統括しました。",
-		implementation: [
-			"Figmaでのワイヤーフレーム・UIデザイン作成と、実装を意識したスタイルガイド・コンポーネント整理",
-			"HTML/CSS/JavaScriptおよびReact・WordPressを用いたフロントエンド実装とブラウザ表示検証",
-			"アルバイトリーダーとして制作スケジュールの管理、コード・デザインレビュー、新規メンバーの育成を実施",
+		team: "クライアント / 制作メンバー複数名",
+		tools: ["Figma", "HTML / CSS", "JavaScript", "React", "Git"],
+		thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
+		highlights: [
+			{ label: "Scope", value: "要件整理 → UI設計 → 実装 → 進行管理" },
+			{ label: "Strength", value: "デザイン意図と実装コストの橋渡し" },
+			{ label: "Team", value: "コードレビュー・メンバー育成を担当" },
 		],
-		result: "設計から実装までの一貫したディレクションにより手戻りを削減し、チーム全体の制作スピードとアウトプット品質の底上げを達成しました。",
+		background:
+			"クライアントの要望をそのまま画面に落とし込むだけでは使いにくくなったり、実装フェーズで手戻りが発生したりする課題がありました。設計と実装の両面を理解した進行役が必要でした。",
+		approach: [
+			"Figmaでコンポーネント設計とレスポンシブの挙動を事前に定義し、実装時の認識ズレを最小化。",
+			"実装フェーズではセマンティックなHTMLと保守しやすいCSS設計を心がけ、アニメーションやマイクロインタラクションで操作感を向上。",
+			"他メンバーのコードレビューやタスク切り出しを行い、チーム全体で品質を担保する進行管理を実践。",
+		],
+		result:
+			"クライアントの意図を汲み取りながら、技術的な実現可能性とスケジュールを両立させて納品まで完走する力を培いました。デザインとエンジニアリングの橋渡しができる点が自身の強みになっています。",
 	},
 ];
 
-const { slug } = Astro.params;
-const currentIndex = works.findIndex((w) => w.slug === slug);
+let work = richWorks.find((w) => w.slug === slug) || richWorks[0];
 
-if (currentIndex === -1) {
-	return Astro.rewrite("/404");
-}
+try {
+	const rawWorks = await getCollection("works");
+	const found = Array.isArray(rawWorks)
+		? rawWorks.find((e: any) => String(e?.slug ?? e?.data?.slug) === slug)
+		: null;
+	if (found) {
+		const d = found.data ?? found;
+		const cmsTools = Array.isArray(d.tools)
+			? d.tools
+			: typeof d.tools === "string"
+				? d.tools.split(",").map((t: string) => t.trim()).filter(Boolean)
+				: work.tools;
 
-const project = works[currentIndex];
-const prevProject = works[(currentIndex - 1 + works.length) % works.length];
-const nextProject = works[(currentIndex + 1) % works.length];
+		work = {
+			...work,
+			title: d.title || work.title,
+			summary: d.summary || work.summary,
+			category: d.category || work.category,
+			role: d.role || work.role,
+			period: d.period || work.period,
+			tools: cmsTools.length > 0 ? cmsTools : work.tools,
+			thumbnail:
+				typeof d.thumbnail === "string"
+					? d.thumbnail
+					: d.thumbnail?.url || d.thumbnail?.$media?.url || work.thumbnail,
+			background: d.background || work.background,
+			result: d.result || work.result,
+		};
+	}
+} catch {}
+
+const currentIndex = richWorks.findIndex((w) => w.slug === work.slug);
+const nextWork = richWorks[(currentIndex + 1) % richWorks.length];
 ---
 
-<Base title={`${project.title} | Works`} description={project.summary}>
-	<article class="work-detail">
-		<header class="detail-hero container">
-			<a href="/#works" class="back-link">
-				<Icon name="ph:arrow-left" aria-hidden="true" />
-				<span>一覧へ戻る</span>
-			</a>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{work.title} | 齋藤 条太郎</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&family=Noto+Serif+JP:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="ambient" aria-hidden="true">
+			<div class="ambient__blob"></div>
+			<div class="ambient__grain"></div>
+		</div>
 
-			<div class="detail-hero__head">
-				<span class="eyebrow">{project.category}</span>
-				<h1 class="detail-title">{project.title}</h1>
-				<p class="detail-summary">{project.summary}</p>
-			</div>
-
-			<dl class="spec-grid">
-				<div class="spec-item">
-					<dt>担当領域 / Role</dt>
-					<dd>{project.role}</dd>
-				</div>
-				<div class="spec-item">
-					<dt>主な成果物 / Deliverables</dt>
-					<dd>{project.deliverables}</dd>
-				</div>
-				<div class="spec-item">
-					<dt>期間 / Period</dt>
-					<dd>{project.period}</dd>
-				</div>
-				<div class="spec-item">
-					<dt>技術スタック / Tools</dt>
-					<dd class="spec-tags">
-						{project.tools.map((tool) => (
-							<span class="tag">{tool}</span>
-						))}
-					</dd>
-				</div>
-			</dl>
-
-			<div class="detail-cover">
-				<img
-					src={project.thumbnail}
-					alt={project.title}
-					transition:name={`work-image-${project.slug}`}
-				/>
-			</div>
+		<header class="site-header">
+			<a href="/" class="brand">齋藤 条太郎</a>
+			<nav class="site-nav">
+				<a href="/">01 Index</a>
+				<a href="/about">02 About</a>
+			</nav>
 		</header>
 
-		<div class="detail-layout container">
-			<aside class="detail-toc" aria-label="Table of contents">
-				<p class="detail-toc__label">Contents</p>
-				<nav class="detail-toc__nav">
-					<a href="#background">01. 背景と課題</a>
-					<a href="#approach">02. 設計方針・アプローチ</a>
-					<a href="#implementation">03. 実装の工夫・技術選定</a>
-					<a href="#result">04. 成果と学び</a>
-				</nav>
-			</aside>
+		<main class="wrap">
+			<a href="/" class="crumb">← Back to Works</a>
 
-			<div class="detail-body">
-				<section id="background" class="detail-section">
-					<span class="detail-section__num">01</span>
+			<div class="meta-bar">
+				<span>{work.category}</span>
+				<span>/</span>
+				<span>{work.period}</span>
+			</div>
+
+			<h1 class="title">{work.title}</h1>
+			<p class="summary">{work.summary}</p>
+
+			<div class="spec-grid">
+				<div class="spec-item">
+					<span class="spec-label">Role</span>
+					<span class="spec-val">{work.role}</span>
+				</div>
+				<div class="spec-item">
+					<span class="spec-label">Team</span>
+					<span class="spec-val">{work.team}</span>
+				</div>
+				<div class="spec-item">
+					<span class="spec-label">Tech Stack</span>
+					<ul class="tags">
+						{work.tools.map((t) => <li>{t}</li>)}
+					</ul>
+				</div>
+			</div>
+
+			<div class="hero-img">
+				<img src={work.thumbnail} alt={work.title} />
+			</div>
+
+			<!-- ハイライト指標 -->
+			<div class="highlights">
+				{
+					work.highlights.map((h) => (
+						<div class="hl-card">
+							<span class="hl-label">{h.label}</span>
+							<p class="hl-val">{h.value}</p>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- 本文セクション -->
+			<div class="sections">
+				<section class="detail-sec">
+					<span class="sec-num">01 / Context &amp; Challenge</span>
 					<h2>背景と課題</h2>
-					<p>{project.background}</p>
+					<p>{work.background}</p>
 				</section>
 
-				<section id="approach" class="detail-section">
-					<span class="detail-section__num">02</span>
-					<h2>設計方針・アプローチ</h2>
-					<p>{project.approach}</p>
-				</section>
-
-				<section id="implementation" class="detail-section">
-					<span class="detail-section__num">03</span>
-					<h2>実装の工夫・技術選定</h2>
-					<ul class="detail-list">
-						{project.implementation.map((item) => (
-							<li>{item}</li>
-						))}
+				<section class="detail-sec">
+					<span class="sec-num">02 / Architecture &amp; Approach</span>
+					<h2>設計方針と技術的な工夫</h2>
+					<ul class="approach-list">
+						{work.approach.map((item) => <li>{item}</li>)}
 					</ul>
 				</section>
 
-				<section id="result" class="detail-section">
-					<span class="detail-section__num">04</span>
+				<section class="detail-sec">
+					<span class="sec-num">03 / Impact &amp; Takeaways</span>
 					<h2>成果と学び</h2>
-					<p>{project.result}</p>
+					<p>{work.result}</p>
 				</section>
 			</div>
-		</div>
 
-		<nav class="detail-pager container" aria-label="Project navigation">
-			<a href={`/works/${prevProject.slug}`} class="pager-card">
-				<span class="pager-card__label">
-					<Icon name="ph:arrow-left" aria-hidden="true" />
-					PREV PROJECT
-				</span>
-				<strong class="pager-card__title">{prevProject.title}</strong>
+			<!-- 次の実績への導線 -->
+			<a href={`/works/${nextWork.slug}`} class="next-card">
+				<div>
+					<span class="next-kicker">Next Case Study</span>
+					<h3>{nextWork.title}</h3>
+				</div>
+				<span class="next-arrow">→</span>
 			</a>
 
-			<a href={`/works/${nextProject.slug}`} class="pager-card pager-card--next">
-				<span class="pager-card__label">
-					NEXT PROJECT
-					<Icon name="ph:arrow-right" aria-hidden="true" />
-				</span>
-				<strong class="pager-card__title">{nextProject.title}</strong>
-			</a>
-		</nav>
-	</article>
-</Base>
+			<footer class="foot">
+				<a href="/" class="back-link">← Indexへ戻る</a>
+				<span>© 2026 齋藤 条太郎</span>
+			</footer>
+		</main>
 
-<style>
-	.work-detail {
-		padding-top: clamp(40px, 6vw, 72px);
-	}
+		<style>
+			:root {
+				--bg: #111112;
+				--surface: rgba(255, 255, 255, 0.04);
+				--ink: #f0efe9;
+				--ink-2: rgba(240, 239, 233, 0.74);
+				--muted: rgba(240, 239, 233, 0.44);
+				--line: rgba(240, 239, 233, 0.14);
+				--ease: cubic-bezier(0.16, 1, 0.3, 1);
+			}
 
-	.back-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		font-size: 14px;
-		font-weight: 500;
-		color: var(--color-text-secondary);
-		transition: color var(--transition-fast);
-	}
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
 
-	.back-link:hover {
-		color: var(--color-text);
-	}
+			body {
+				margin: 0;
+				background: var(--bg);
+				color: var(--ink);
+				font-family: "Inter", "Noto Sans JP", sans-serif;
+				-webkit-font-smoothing: antialiased;
+			}
 
-	.detail-hero__head {
-		max-width: 840px;
-		margin-top: 28px;
-	}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
 
-	.detail-title {
-		margin-top: 12px;
-		font-size: clamp(28px, 4.2vw, 52px);
-		font-weight: 600;
-		line-height: 1.2;
-		letter-spacing: -0.02em;
-	}
+			.ambient {
+				position: fixed;
+				inset: 0;
+				z-index: 0;
+				pointer-events: none;
+				background: radial-gradient(circle at 20% 80%, #26272b 0%, #121214 55%, #0c0c0d 100%);
+			}
 
-	.detail-summary {
-		margin-top: 20px;
-		font-size: clamp(16px, 1.7vw, 18.5px);
-		line-height: 1.75;
-		color: var(--color-text-secondary);
-	}
+			.ambient__blob {
+				position: absolute;
+				width: 55vw;
+				height: 55vw;
+				right: -15vw;
+				top: -15vw;
+				border-radius: 50%;
+				filter: blur(120px);
+				background: radial-gradient(circle, rgba(160, 175, 200, 0.16), transparent 70%);
+			}
 
-	.spec-grid {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		gap: 20px;
-		margin-top: 40px;
-		padding: 24px;
-		border-radius: var(--radius-xl);
-		background: var(--color-surface);
-		box-shadow: var(--shadow-card);
-	}
+			.ambient__grain {
+				position: absolute;
+				inset: 0;
+				opacity: 0.08;
+				background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 0);
+				background-size: 3px 3px;
+			}
 
-	.spec-item dt {
-		font-size: 12px;
-		font-weight: 600;
-		color: var(--color-muted);
-	}
+			.site-header {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				z-index: 100;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				padding: 20px clamp(20px, 4vw, 48px);
+				border-bottom: 1px solid var(--line);
+				background: rgba(17, 17, 18, 0.65);
+				backdrop-filter: blur(12px);
+			}
 
-	.spec-item dd {
-		margin-top: 8px;
-		font-size: 14.5px;
-		font-weight: 500;
-		line-height: 1.5;
-		color: var(--color-text);
-	}
+			.brand {
+				font-family: "Noto Serif JP", serif;
+				font-size: 15px;
+				letter-spacing: 0.12em;
+			}
 
-	.spec-tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 6px;
-	}
+			.site-nav {
+				display: flex;
+				gap: 24px;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--ink-2);
+			}
 
-	.tag {
-		padding: 4px 10px;
-		border-radius: var(--radius-sm);
-		background: var(--color-sunken);
-		font-size: 12px;
-		font-weight: 500;
-		color: var(--color-text-secondary);
-	}
+			.wrap {
+				position: relative;
+				z-index: 2;
+				width: min(920px, calc(100% - clamp(32px, 6vw, 96px)));
+				margin-inline: auto;
+				padding: 124px 0 88px;
+			}
 
-	.detail-cover {
-		margin-top: 36px;
-		aspect-ratio: 16 / 9;
-		border-radius: var(--radius-media);
-		overflow: hidden;
-		background: var(--color-sunken);
-		box-shadow: var(--shadow-card);
-	}
+			.crumb {
+				display: inline-block;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+				margin-bottom: 28px;
+			}
 
-	.detail-cover img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+			.crumb:hover {
+				color: var(--ink);
+			}
 
-	.detail-layout {
-		display: grid;
-		grid-template-columns: 220px minmax(0, 1fr);
-		gap: clamp(32px, 6vw, 80px);
-		margin-top: clamp(56px, 8vw, 96px);
-	}
+			.meta-bar {
+				display: flex;
+				gap: 10px;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
 
-	.detail-toc {
-		position: sticky;
-		top: 104px;
-		align-self: start;
-	}
+			.title {
+				margin: 14px 0 0;
+				font-family: "Noto Serif JP", serif;
+				font-size: clamp(26px, 4vw, 44px);
+				font-weight: 500;
+				line-height: 1.35;
+				text-wrap: balance;
+			}
 
-	.detail-toc__label {
-		font-size: 12px;
-		font-weight: 600;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-		color: var(--color-muted);
-	}
+			.summary {
+				margin: 18px 0 0;
+				font-size: 15.5px;
+				line-height: 1.9;
+				color: var(--ink-2);
+			}
 
-	.detail-toc__nav {
-		display: grid;
-		gap: 12px;
-		margin-top: 16px;
-		padding-left: 14px;
-		border-left: 1px solid var(--color-border);
-	}
+			.spec-grid {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 20px;
+				margin-top: 32px;
+				padding-block: 22px;
+				border-top: 1px solid var(--line);
+				border-bottom: 1px solid var(--line);
+			}
 
-	.detail-toc__nav a {
-		font-size: 13.5px;
-		color: var(--color-text-secondary);
-		transition: color var(--transition-fast);
-	}
+			.spec-label {
+				display: block;
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+				margin-bottom: 8px;
+			}
 
-	.detail-toc__nav a:hover {
-		color: var(--color-text);
-	}
+			.spec-val {
+				font-size: 13.5px;
+				line-height: 1.6;
+				color: var(--ink);
+			}
 
-	.detail-body {
-		display: grid;
-		gap: clamp(48px, 6vw, 72px);
-		max-width: 720px;
-	}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 6px;
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
 
-	.detail-section {
-		scroll-margin-top: 104px;
-	}
+			.tags li {
+				padding: 3px 8px;
+				border-radius: 5px;
+				border: 1px solid var(--line);
+				background: var(--surface);
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--ink-2);
+			}
 
-	.detail-section__num {
-		display: inline-block;
-		font-size: 13px;
-		font-weight: 600;
-		color: var(--color-accent);
-	}
+			.hero-img {
+				margin-top: 36px;
+				aspect-ratio: 16 / 9;
+				border-radius: 16px;
+				overflow: hidden;
+				border: 1px solid var(--line);
+			}
 
-	.detail-section h2 {
-		margin-top: 6px;
-		font-size: clamp(22px, 2.5vw, 28px);
-		font-weight: 600;
-	}
+			.hero-img img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
 
-	.detail-section p {
-		margin-top: 16px;
-		font-size: 16px;
-		line-height: 1.85;
-		color: var(--color-text-secondary);
-	}
+			.highlights {
+				display: grid;
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				gap: 16px;
+				margin-top: 24px;
+			}
 
-	.detail-list {
-		display: grid;
-		gap: 14px;
-		margin-top: 20px;
-	}
+			.hl-card {
+				padding: 20px;
+				border-radius: 14px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+			}
 
-	.detail-list li {
-		position: relative;
-		padding: 16px 20px 16px 36px;
-		border-radius: var(--radius-lg);
-		background: var(--color-surface);
-		box-shadow: var(--shadow-sm);
-		font-size: 15px;
-		line-height: 1.7;
-		color: var(--color-text);
-	}
+			.hl-label {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
 
-	.detail-list li::before {
-		content: "";
-		position: absolute;
-		top: 25px;
-		left: 18px;
-		width: 6px;
-		height: 6px;
-		border-radius: 50%;
-		background: var(--color-accent);
-	}
+			.hl-val {
+				margin: 8px 0 0;
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 1.5;
+			}
 
-	.detail-pager {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 20px;
-		margin-top: clamp(72px, 10vw, 120px);
-		padding-top: 40px;
-		border-top: 1px solid var(--color-border);
-	}
+			.sections {
+				margin-top: 64px;
+				display: flex;
+				flex-direction: column;
+				gap: 52px;
+			}
 
-	.pager-card {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		padding: 24px;
-		border-radius: var(--radius-xl);
-		background: var(--color-surface);
-		box-shadow: var(--shadow-card);
-		transition:
-			transform var(--transition-base),
-			box-shadow var(--transition-base);
-	}
+			.detail-sec {
+				padding-top: 28px;
+				border-top: 1px solid var(--line);
+			}
 
-	.pager-card:hover {
-		transform: translateY(-3px);
-		box-shadow: var(--shadow-card-hover);
-	}
+			.sec-num {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
 
-	.pager-card--next {
-		text-align: right;
-		align-items: flex-end;
-	}
+			.detail-sec h2 {
+				margin: 8px 0 0;
+				font-family: "Noto Serif JP", serif;
+				font-size: 22px;
+				font-weight: 500;
+			}
 
-	.pager-card__label {
-		display: inline-flex;
-		align-items: center;
-		gap: 6px;
-		font-size: 12px;
-		font-weight: 600;
-		letter-spacing: 0.04em;
-		color: var(--color-muted);
-	}
+			.detail-sec p {
+				margin: 16px 0 0;
+				font-size: 15px;
+				line-height: 1.95;
+				color: var(--ink-2);
+			}
 
-	.pager-card__title {
-		font-size: 16.5px;
-		font-weight: 600;
-		line-height: 1.4;
-		color: var(--color-text);
-	}
+			.approach-list {
+				margin: 18px 0 0;
+				padding-left: 20px;
+				display: flex;
+				flex-direction: column;
+				gap: 14px;
+				font-size: 15px;
+				line-height: 1.85;
+				color: var(--ink-2);
+			}
 
-	@media (max-width: 960px) {
-		.spec-grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
+			.next-card {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				margin-top: 72px;
+				padding: 28px 32px;
+				border-radius: 16px;
+				background: var(--surface);
+				border: 1px solid var(--line);
+				transition:
+					transform 280ms var(--ease),
+					border-color 280ms var(--ease);
+			}
 
-		.detail-layout {
-			grid-template-columns: 1fr;
-		}
+			.next-card:hover {
+				transform: translateY(-3px);
+				border-color: rgba(240, 239, 233, 0.35);
+			}
 
-		.detail-toc {
-			display: none;
-		}
-	}
+			.next-kicker {
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
 
-	@media (max-width: 640px) {
-		.spec-grid,
-		.detail-pager {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
+			.next-card h3 {
+				margin: 8px 0 0;
+				font-family: "Noto Serif JP", serif;
+				font-size: 20px;
+				font-weight: 500;
+			}
+
+			.next-arrow {
+				font-size: 22px;
+				color: var(--ink-2);
+			}
+
+			.foot {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-top: 64px;
+				padding-top: 20px;
+				border-top: 1px solid var(--line);
+				font-family: "JetBrains Mono", monospace;
+				font-size: 11px;
+				color: var(--muted);
+			}
+
+			.back-link {
+				color: var(--ink);
+				border-bottom: 1px solid var(--ink);
+				padding-bottom: 2px;
+			}
+
+			@media (max-width: 768px) {
+				.spec-grid,
+				.highlights {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</body>
+</html>
