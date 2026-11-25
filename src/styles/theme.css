@@ -1,0 +1,23 @@
+:root {
+  color-scheme: light;
+  --color-bg: light-dark(#fafaf9, #0e0e0d);
+  --color-surface: light-dark(#ffffff, #171615);
+  --color-sunken: light-dark(#f2f1ee, #1d1c1a);
+  --color-text: light-dark(#141312, #f4f3f0);
+  --color-text-secondary: light-dark(#52504c, #b5b0a8);
+  --color-muted: light-dark(#76736d, #8c8780);
+  --color-accent: light-dark(#1d4ed8, #60a5fa);
+
+  --font-size-display: clamp(44px, 6.8vw, 96px);
+  --font-size-h2: clamp(32px, 3.8vw, 52px);
+  --section-space: clamp(88px, 10vw, 140px);
+
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-media: 20px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 180ms var(--ease-out);
+  --transition-base: 320ms var(--ease-out);
+  --transition-slow: 560ms var(--ease-out);
+}
