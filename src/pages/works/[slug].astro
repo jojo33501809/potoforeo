@@ -237,13 +237,14 @@ const { work } = Astro.props as { work: WorkDetail };
 
 		<style>
 			:root {
-				--bg: #111112;
-				--surface: rgba(255, 255, 255, 0.04);
-				--ink: #f0efe9;
-				--ink-2: rgba(240, 239, 233, 0.74);
-				--muted: rgba(240, 239, 233, 0.44);
-				--line: rgba(240, 239, 233, 0.14);
-				--ease: cubic-bezier(0.16, 1, 0.3, 1);
+				--bg: #f8fafc;
+				--surface: rgba(255, 255, 255, 0.9);
+				--ink: #0f172a;
+				--ink-2: #334155;
+				--muted: #64748b;
+				--navy: #1e3a8a;
+				--line: rgba(15, 23, 42, 0.12);
+				--ease: cubic-bezier(0.22, 1, 0.36, 1);
 			}
 
 			*,
@@ -270,7 +271,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				inset: 0;
 				z-index: 0;
 				pointer-events: none;
-				background: radial-gradient(circle at 20% 80%, #26272b 0%, #121214 55%, #0c0c0d 100%);
+				background: radial-gradient(circle at 20% 80%, #eef2ff 0%, #f8fafc 55%, #ffffff 100%);
 			}
 
 			.ambient__blob {
@@ -281,15 +282,15 @@ const { work } = Astro.props as { work: WorkDetail };
 				top: -15vw;
 				border-radius: 50%;
 				filter: blur(120px);
-				opacity: 0.35;
-				background: radial-gradient(circle, rgba(160, 175, 200, 0.22), transparent 70%);
+				opacity: 0.45;
+				background: radial-gradient(circle, rgba(30, 58, 138, 0.14), transparent 70%);
 			}
 
 			.ambient__grain {
 				position: absolute;
 				inset: 0;
-				opacity: 0.08;
-				background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 0);
+				opacity: 0.04;
+				background-image: radial-gradient(rgba(15, 23, 42, 0.6) 1px, transparent 0);
 				background-size: 3px 3px;
 			}
 
@@ -304,7 +305,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				justify-content: space-between;
 				padding: 20px clamp(20px, 4vw, 48px);
 				border-bottom: 1px solid var(--line);
-				background: rgba(17, 17, 18, 0.65);
+				background: rgba(248, 250, 252, 0.82);
 				backdrop-filter: blur(12px);
 			}
 
@@ -312,6 +313,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				font-family: "Noto Serif JP", serif;
 				font-size: 15px;
 				letter-spacing: 0.12em;
+				color: var(--ink);
 			}
 
 			.site-nav {
@@ -323,15 +325,15 @@ const { work } = Astro.props as { work: WorkDetail };
 			}
 
 			.site-nav a:hover {
-				color: var(--ink);
+				color: var(--navy);
 			}
 
 			[data-reveal].is-ready {
 				opacity: 0;
 				transform: translateY(22px);
 				transition:
-					opacity 700ms var(--ease),
-					transform 700ms var(--ease);
+					opacity 950ms var(--ease),
+					transform 950ms var(--ease);
 			}
 
 			[data-reveal].is-in {
@@ -351,11 +353,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				display: inline-block;
 				font-family: "JetBrains Mono", monospace;
 				font-size: 11px;
-				color: var(--muted);
-			}
-
-			.back-top:hover {
-				color: var(--ink);
+				color: var(--navy);
 			}
 
 			.meta {
@@ -364,7 +362,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				margin-top: 28px;
 				font-family: "JetBrains Mono", monospace;
 				font-size: 11px;
-				color: var(--muted);
+				color: var(--navy);
 			}
 
 			.title {
@@ -395,16 +393,16 @@ const { work } = Astro.props as { work: WorkDetail };
 				align-items: center;
 				padding: 10px 22px;
 				border-radius: 999px;
-				background: var(--ink);
-				color: #111112;
+				background: var(--navy);
+				color: #ffffff;
 				font-size: 13px;
 				font-weight: 500;
 			}
 
 			.ext-btn--ghost {
-				background: transparent;
-				color: var(--ink);
-				border: 1px solid var(--line);
+				background: #ffffff;
+				color: var(--navy);
+				border: 1px solid rgba(30, 58, 138, 0.25);
 			}
 
 			.cover {
@@ -413,7 +411,8 @@ const { work } = Astro.props as { work: WorkDetail };
 				overflow: hidden;
 				border: 1px solid var(--line);
 				aspect-ratio: 16 / 9;
-				background: #18181a;
+				background: #e2e8f0;
+				box-shadow: 0 20px 44px rgba(15, 23, 42, 0.08);
 			}
 
 			.cover img {
@@ -436,7 +435,7 @@ const { work } = Astro.props as { work: WorkDetail };
 			.specs dt {
 				font-family: "JetBrains Mono", monospace;
 				font-size: 11px;
-				color: var(--muted);
+				color: var(--navy);
 			}
 
 			.specs dd {
@@ -456,7 +455,7 @@ const { work } = Astro.props as { work: WorkDetail };
 				font-family: "JetBrains Mono", monospace;
 				font-size: 13px;
 				font-weight: 500;
-				color: var(--muted);
+				color: var(--navy);
 			}
 
 			.case-sec p,
@@ -487,8 +486,8 @@ const { work } = Astro.props as { work: WorkDetail };
 			}
 
 			.back-bottom {
-				color: var(--ink);
-				border-bottom: 1px solid var(--ink);
+				color: var(--navy);
+				border-bottom: 1px solid var(--navy);
 				padding-bottom: 2px;
 			}
 
