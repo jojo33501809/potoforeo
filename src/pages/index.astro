@@ -1,6 +1,4 @@
 ---
-import { getCollection } from "emdash";
-
 interface ProjectItem {
 	slug: string;
 	title: string;
@@ -13,7 +11,7 @@ interface ProjectItem {
 	thumbnail: string;
 }
 
-const fallbackProjects: ProjectItem[] = [
+const projects: ProjectItem[] = [
 	{
 		slug: "hubspot-modular-lp",
 		title: "HubSpot CMS 汎用LPテンプレート設計",
@@ -84,50 +82,6 @@ const capabilities = [
 	},
 ];
 
-const defaultThumbnail =
-	"https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1400&q=80";
-
-let projects: ProjectItem[] = fallbackProjects;
-
-try {
-	const rawWorks = await getCollection("works");
-	if (Array.isArray(rawWorks) && rawWorks.length > 0) {
-		projects = rawWorks.map((entry: any) => {
-			const data = entry?.data ?? entry ?? {};
-			const toolsValue = data.tools;
-			const tools = Array.isArray(toolsValue)
-				? toolsValue.map((t: unknown) => String(t).trim()).filter(Boolean)
-				: typeof toolsValue === "string"
-					? toolsValue
-							.split(",")
-							.map((t) => t.trim())
-							.filter(Boolean)
-					: [];
-
-			const period = String(data.period ?? "2026");
-			const yearMatch = period.match(/\d{4}/);
-			const thumbUrl =
-				typeof data.thumbnail === "string"
-					? data.thumbnail
-					: data.thumbnail?.url || data.thumbnail?.$media?.url || defaultThumbnail;
-
-			return {
-				slug: String(entry?.slug ?? data.slug ?? "work"),
-				title: String(data.title ?? "無題の制作実績"),
-				summary: String(data.summary ?? ""),
-				category: String(data.category ?? "Web"),
-				role: String(data.role ?? "Frontend"),
-				period,
-				year: yearMatch ? yearMatch[0] : "2026",
-				tools,
-				thumbnail: thumbUrl,
-			};
-		});
-	}
-} catch {
-	projects = fallbackProjects;
-}
-
 const formatNum = (i: number) => String(i + 1).padStart(2, "0");
 const contactEmail = "jojosaito1809@gmail.com";
 ---
@@ -146,7 +100,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 		/>
 	</head>
 	<body class="is-intro-locked">
-		<!-- スモーキー背景 + 粒子ノイズ -->
+		<!-- スモーキー背景 + モーショングラフィックス + 粒子ノイズ -->
 		<div class="ambient" aria-hidden="true">
 			<div class="ambient__blob ambient__blob--1"></div>
 			<div class="ambient__blob ambient__blob--2"></div>
@@ -164,7 +118,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 			Skip Intro ↵
 		</button>
 
-		<!-- 上部固定ヘッダー（タイピング完了後にスッと表示） -->
+		<!-- 上部固定ヘッダー -->
 		<header class="site-header intro-chrome" id="site-header">
 			<div class="site-header__left">
 				<span class="status-dot"></span>
@@ -173,9 +127,9 @@ const contactEmail = "jojosaito1809@gmail.com";
 
 			<nav class="site-nav" aria-label="Main navigation">
 				<button type="button" data-jump="0">01 Index</button>
-				<button type="button" data-jump="0.29">02 Works</button>
-				<button type="button" data-jump="0.66">03 Capabilities</button>
-				<button type="button" data-jump="0.80">04 About</button>
+				<button type="button" data-jump="0.27">02 Works</button>
+				<button type="button" data-jump="0.68">03 Capabilities</button>
+				<button type="button" data-jump="0.82">04 About</button>
 				<button type="button" data-jump="0.97">05 Contact</button>
 			</nav>
 
@@ -186,7 +140,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 			</div>
 		</header>
 
-		<!-- 01. ファーストビュー（順番にタイピング出現） -->
+		<!-- 01. ファーストビュー -->
 		<section class="brand-hero" id="brand-hero">
 			<span class="brand-hero__kicker" id="fv-kicker" data-full="Portfolio / 2026"></span>
 			<h1 class="brand-hero__jp" aria-label="齋藤 条太郎">
@@ -196,19 +150,15 @@ const contactEmail = "jojosaito1809@gmail.com";
 			<div class="brand-hero__facts" id="fv-facts" data-full="Based in Tokyo  /  Focus: Frontend & CMS  /  28卒 エンジニア志望"></div>
 		</section>
 
-		<!-- 下部ミニマルHUD（タイピング完了後に解禁） -->
-		<!-- 下部ミニマルHUD（見やすく操作しやすい進捗バー＋目盛り） -->
+		<!-- 下部ミニマルHUD -->
 		<footer class="site-hud intro-chrome" id="site-hud">
 			<div class="hud-left">
 				<span class="hud-label" id="hud-area">01 / First View</span>
 				<span class="hud-pct" id="hud-pct">00%</span>
 			</div>
 
-			<div class="hud-progress-wrap">
-				<div class="hud-progress-track" aria-hidden="true">
-					<div class="hud-progress-fill" id="hud-progress-fill"></div>
-				</div>
-				
+			<div class="hud-progress-track" aria-hidden="true">
+				<div class="hud-progress-fill" id="hud-progress-fill"></div>
 			</div>
 
 			<button type="button" class="hud-next" id="hud-next-btn" data-cursor="Next">
@@ -244,10 +194,10 @@ const contactEmail = "jojosaito1809@gmail.com";
 					</div>
 				</div>
 
-				<!-- 右からスライドして大きく現れ、左へ抜ける見出し -->
+				<!-- Selected Works バナー -->
 				<h2 class="section-banner" id="section-banner" data-type-text="Selected Works.">Selected Works.</h2>
 
-				<!-- 02. Works（4パターンの動き＋表示時にタイトルをタイピング） -->
+				<!-- 02. Works -->
 				<div class="works-stage" id="works-stage">
 					<div class="works-viewport">
 						{
@@ -281,7 +231,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 					</div>
 				</div>
 
-				<!-- 03. Capabilities（できることの3軸） -->
+				<!-- 03. Capabilities -->
 				<section class="cap-panel" id="cap-panel">
 					<div class="cap-head">
 						<span class="panel-kicker">03 / Capabilities</span>
@@ -364,9 +314,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 			const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 			const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-			// =========================================================================
 			// 1. オープニング・タイピングシーケンス（完了までスクロールロック）
-			// =========================================================================
 			window.scrollTo(0, 0);
 			let introDone = false;
 			let introAborted = false;
@@ -378,7 +326,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 			const skipBtn = document.getElementById("skip-intro-btn");
 			const chromeEls = document.querySelectorAll<HTMLElement>(".intro-chrome");
 
-			// ロック中はホイール・タッチスクロールを無効化
 			const blockScroll = (e: Event) => {
 				if (!introDone) e.preventDefault();
 			};
@@ -418,7 +365,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				}
 				setCaret(null);
 
-				// ヘッダー・HUDを表示し、スクロールロック解除
 				chromeEls.forEach((el) => el.classList.add("is-visible"));
 				skipBtn?.classList.add("is-hidden");
 				document.documentElement.classList.remove("is-intro-locked");
@@ -438,14 +384,12 @@ const contactEmail = "jojosaito1809@gmail.com";
 			const runIntroSequence = async () => {
 				await sleep(220);
 
-				// 1. Portfolio / 2026
 				if (fvKicker) {
 					await typeString(fvKicker, fvKicker.dataset.full || "Portfolio / 2026", 24);
 				}
 				if (introAborted) return;
 				await sleep(120);
 
-				// 2. 齋藤 条太郎（PCローマ字→漢字変換タイピング）
 				if (fvName) {
 					setCaret(fvName);
 					const nameSteps = [
@@ -471,14 +415,12 @@ const contactEmail = "jojosaito1809@gmail.com";
 				}
 				if (introAborted) return;
 
-				// 3. サブコピー
 				if (fvCopy) {
 					await typeString(fvCopy, fvCopy.dataset.full || "", 20);
 				}
 				if (introAborted) return;
 				await sleep(100);
 
-				// 4. 3つの事実バー
 				if (fvFacts) {
 					fvFacts.classList.add("is-shown");
 					await typeString(fvFacts, fvFacts.dataset.full || "", 14);
@@ -486,15 +428,12 @@ const contactEmail = "jojosaito1809@gmail.com";
 				if (introAborted) return;
 				await sleep(180);
 
-				// 5. 全完了 → スクロール解禁
 				finishIntro();
 			};
 
 			runIntroSequence();
 
-			// =========================================================================
 			// 2. 後続セクション用：表示された瞬間に1回だけ高速タイピング
-			// =========================================================================
 			const typedOnceSet = new WeakSet<HTMLElement>();
 			const triggerTypeOnce = (el: HTMLElement | null, speed = 20) => {
 				if (!el || typedOnceSet.has(el)) return;
@@ -513,9 +452,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 				}, speed);
 			};
 
-			// =========================================================================
 			// 3. カスタムカーソル
-			// =========================================================================
 			const ring = document.getElementById("ring-cursor");
 			const ringLabel = document.getElementById("ring-cursor-label");
 			if (ring && window.matchMedia("(pointer: fine)").matches) {
@@ -550,9 +487,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 				});
 			}
 
-			// =========================================================================
 			// 4. スクロール連動タイムライン
-			// =========================================================================
 			const brandHero = document.getElementById("brand-hero");
 			const banner = document.getElementById("section-banner");
 			const worksStage = document.getElementById("works-stage");
@@ -567,39 +502,17 @@ const contactEmail = "jojosaito1809@gmail.com";
 			const nextText = document.getElementById("hud-next-text");
 			const nextArrow = document.getElementById("hud-next-arrow");
 
-			// 各セクションの「見頃ポイント」を定義
 			const workCount = Math.max(workSlides.length, 1);
 			const workPoints = Array.from({ length: workCount }, (_, i) =>
 				workCount === 1 ? 0.42 : 0.27 + (0.31 * i) / (workCount - 1),
 			);
 			const snapPoints = [
-				{ p: 0.0, label: "First View" },
-				...workPoints.map((pt, i) => ({ p: pt, label: `Work 0${i + 1}` })),
-				{ p: 0.68, label: "Capabilities" },
-				{ p: 0.82, label: "About" },
-				{ p: 0.97, label: "Contact" },
+				0.0,
+				...workPoints,
+				0.68,
+				0.82,
+				0.97,
 			];
-
-			// 下部HUDにクリックできる目盛りドットを生成
-			const hudDotsWrap = document.getElementById("hud-dots");
-			const hudDotEls: HTMLButtonElement[] = [];
-			if (hudDotsWrap) {
-				snapPoints.forEach((pt) => {
-					const dot = document.createElement("button");
-					dot.type = "button";
-					dot.className = "hud-dot";
-					dot.title = pt.label;
-					dot.setAttribute("aria-label", pt.label);
-					dot.style.left = `${pt.p * 100}%`;
-					dot.addEventListener("click", () => {
-						if (!introDone) finishIntro();
-						const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-						window.scrollTo({ top: maxScroll * pt.p, behavior: "smooth" });
-					});
-					hudDotsWrap.appendChild(dot);
-					hudDotEls.push(dot);
-				});
-			}
 
 			let smoothP = 0;
 
@@ -612,21 +525,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				if (hudPct) hudPct.textContent = `${String(Math.round(p * 100)).padStart(2, "0")}%`;
 				if (hudFill) hudFill.style.transform = `scaleX(${p})`;
 
-				// 現在地に一番近いドットをハイライト
-				let activeDotIdx = 0;
-				let minDotDiff = Infinity;
-				snapPoints.forEach((pt, idx) => {
-					const d = Math.abs(p - pt.p);
-					if (d < minDotDiff) {
-						minDotDiff = d;
-						activeDotIdx = idx;
-					}
-				});
-				hudDotEls.forEach((dot, idx) => {
-					dot.dataset.active = idx === activeDotIdx ? "true" : "false";
-				});
-
-				// A. First View：0.00〜0.11
 				const heroOut = easeOut(invLerp(0.03, 0.11, p));
 				if (brandHero) {
 					const topY = lerp(window.innerHeight * 0.5, 96, heroOut);
@@ -637,7 +535,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 					brandHero.style.pointerEvents = alpha > 0.2 ? "auto" : "none";
 				}
 
-				// B. "Selected Works." バナー：0.12〜0.22
 				if (banner) {
 					const enterT = easeOut(invLerp(0.12, 0.16, p));
 					const exitT = easeOut(invLerp(0.18, 0.22, p));
@@ -649,7 +546,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 					if (alpha > 0.35) triggerTypeOnce(banner, 24);
 				}
 
-				// C. 02 Works：0.23〜0.62（中央付近に静止区間を作り読みやすく）
 				if (worksStage) {
 					const stageIn = easeOut(invLerp(0.23, 0.26, p));
 					const stageOut = easeOut(invLerp(0.59, 0.62, p));
@@ -663,7 +559,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 
 					workSlides.forEach((slide, i) => {
 						const rawDist = i - floatIdx;
-						// |rawDist| < 0.16 の間はピタッと静止して読めるようにする
 						const hold = 0.16;
 						const absD = Math.abs(rawDist);
 						const dist = absD <= hold ? 0 : Math.sign(rawDist) * ((absD - hold) / (1 - hold));
@@ -703,7 +598,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 					});
 				}
 
-				// D. 03 Capabilities：0.64〜0.75
 				if (capPanel) {
 					const cIn = easeOut(invLerp(0.64, 0.67, p));
 					const cOut = easeOut(invLerp(0.72, 0.75, p));
@@ -717,7 +611,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 					}
 				}
 
-				// E. 04 About：0.77〜0.88
 				if (aboutPanel) {
 					const aIn = easeOut(invLerp(0.77, 0.80, p));
 					const aOut = easeOut(invLerp(0.85, 0.88, p));
@@ -731,7 +624,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 					}
 				}
 
-				// F. 05 Contact：0.90〜1.00
 				if (contactPanel) {
 					const ctIn = easeOut(invLerp(0.90, 0.95, p));
 					const s = lerp(0.92, 1, ctIn);
@@ -743,13 +635,11 @@ const contactEmail = "jojosaito1809@gmail.com";
 					}
 				}
 
-				// G. 後半マーキー
 				if (bgMarquee) {
 					const mAlpha = easeOut(invLerp(0.62, 0.68, p));
 					bgMarquee.style.opacity = String(mAlpha);
 				}
 
-				// H. HUD テキスト
 				if (hudArea) {
 					if (p < 0.12) hudArea.textContent = "01 / First View";
 					else if (p < 0.63) hudArea.textContent = "02 / Selected Works";
@@ -781,13 +671,12 @@ const contactEmail = "jojosaito1809@gmail.com";
 				});
 			});
 
-			// Nextボタン：次の見頃ポイントへピタッと移動
 			document.getElementById("hud-next-btn")?.addEventListener("click", () => {
 				if (!introDone) return;
 				const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
 				const currentP = clamp(window.scrollY / maxScroll);
-				const nextPt = snapPoints.find((pt) => pt.p > currentP + 0.02);
-				const target = nextPt ? nextPt.p : 0;
+				const nextPt = snapPoints.find((pt) => pt > currentP + 0.02);
+				const target = nextPt ?? 0;
 				window.scrollTo({ top: maxScroll * target, behavior: "smooth" });
 			});
 
@@ -827,13 +716,13 @@ const contactEmail = "jojosaito1809@gmail.com";
 						const maxScroll = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
 						const currentP = clamp(window.scrollY / maxScroll);
 
-						let nearest = snapPoints[0].p;
+						let nearest = snapPoints[0];
 						let minDiff = Math.abs(currentP - nearest);
 						for (const pt of snapPoints) {
-							const diff = Math.abs(currentP - pt.p);
+							const diff = Math.abs(currentP - pt);
 							if (diff < minDiff) {
 								minDiff = diff;
-								nearest = pt.p;
+								nearest = pt;
 							}
 						}
 
@@ -848,16 +737,15 @@ const contactEmail = "jojosaito1809@gmail.com";
 				},
 				{ passive: true },
 			);
-			// =========================================================================
-			// 6. 背景モーショングラフィックス（幾何学ウェーブ + 浮遊パーティクル）
-			// =========================================================================
+
+			// 6. 背景モーショングラフィックス
 			const canvas = document.getElementById("bg-motion") as HTMLCanvasElement | null;
 			const ctx = canvas?.getContext("2d");
 
 			if (canvas && ctx) {
 				let width = 0;
 				let height = 0;
-				let dpr = Math.min(window.devicePixelRatio || 1, 2);
+				const dpr = Math.min(window.devicePixelRatio || 1, 2);
 				let mx = 0.5;
 				let my = 0.5;
 				let targetMx = 0.5;
@@ -896,7 +784,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 
 					ctx.clearRect(0, 0, width, height);
 
-					// スクロール量に応じて波の位相と傾きを変化させる
 					const scrollPhase = smoothP * Math.PI * 2.5;
 					const lineCount = 7;
 
@@ -923,7 +810,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 						ctx.stroke();
 					}
 
-					// 浮遊パーティクル & 近い粒子同士を細い線で結ぶ
 					for (let i = 0; i < particles.length; i++) {
 						const pt = particles[i];
 						pt.x = (pt.x + pt.vx + 1) % 1;
@@ -958,7 +844,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 
 				requestAnimationFrame(drawMotion);
 			}
-			
 		</script>
 
 		<style>
@@ -981,7 +866,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				filter: saturate(0.22) contrast(0.96);
 			}
 
-			/* オープニング演出中はスクロール完全ロック */
 			html.is-intro-locked,
 			body.is-intro-locked {
 				overflow: hidden;
@@ -1008,7 +892,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				text-decoration: none;
 			}
 
-			/* タイピング中の点滅カーソル＆変換中下線 */
 			.active-caret::after {
 				content: "";
 				display: inline-block;
@@ -1034,7 +917,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				text-decoration-color: var(--muted);
 			}
 
-			/* スキップボタン */
 			.skip-intro-btn {
 				position: fixed;
 				right: clamp(20px, 4vw, 48px);
@@ -1061,7 +943,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				pointer-events: none;
 			}
 
-			/* ヘッダー・HUDのフェードイン */
 			.intro-chrome {
 				opacity: 0;
 				pointer-events: none;
@@ -1073,7 +954,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				pointer-events: auto;
 			}
 
-			/* スモーキー背景 */
 			.ambient {
 				position: fixed;
 				inset: 0;
@@ -1117,6 +997,15 @@ const contactEmail = "jojosaito1809@gmail.com";
 				}
 			}
 
+			#bg-motion {
+				position: absolute;
+				inset: 0;
+				width: 100%;
+				height: 100%;
+				display: block;
+				opacity: 0.9;
+			}
+
 			.ambient__grain {
 				position: absolute;
 				inset: 0;
@@ -1125,7 +1014,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				background-size: 3px 3px;
 			}
 
-			/* カスタムカーソル */
 			.ring-cursor {
 				position: fixed;
 				top: 0;
@@ -1164,7 +1052,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				text-transform: uppercase;
 			}
 
-			/* 上部ヘッダー */
 			.site-header {
 				position: fixed;
 				top: 0;
@@ -1233,7 +1120,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				color: var(--ink);
 			}
 
-			/* 01. ファーストビュー */
 			.brand-hero {
 				position: fixed;
 				top: 0;
@@ -1293,7 +1179,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				opacity: 1;
 			}
 
-			/* 下部HUD */
 			.site-hud {
 				position: fixed;
 				left: 0;
@@ -1308,6 +1193,7 @@ const contactEmail = "jojosaito1809@gmail.com";
 				font-family: "JetBrains Mono", monospace;
 				font-size: 11px;
 				color: var(--ink-2);
+				background: linear-gradient(to top, rgba(17, 17, 18, 0.85), rgba(17, 17, 18, 0));
 			}
 
 			.hud-left {
@@ -1320,8 +1206,9 @@ const contactEmail = "jojosaito1809@gmail.com";
 			}
 
 			.hud-progress-track {
-				height: 1px;
-				background: var(--line);
+				height: 2px;
+				background: rgba(240, 239, 233, 0.16);
+				border-radius: 999px;
 				overflow: hidden;
 			}
 
@@ -1336,20 +1223,27 @@ const contactEmail = "jojosaito1809@gmail.com";
 				display: inline-flex;
 				align-items: center;
 				gap: 8px;
-				border: 1px solid var(--line);
+				border: 1px solid rgba(240, 239, 233, 0.25);
 				border-radius: 999px;
-				background: rgba(255, 255, 255, 0.04);
+				background: rgba(240, 239, 233, 0.08);
 				color: var(--ink);
 				padding: 6px 14px;
 				font: inherit;
 				cursor: pointer;
+				transition:
+					background-color 220ms var(--ease),
+					transform 220ms var(--ease);
 			}
 
-			/* スクロールステージ */
+			.hud-next:hover {
+				background: rgba(240, 239, 233, 0.16);
+				transform: translateY(-1px);
+			}
+
 			.scroll-track {
 				position: relative;
 				z-index: 10;
-				height: 740vh;
+				height: 860vh;
 			}
 
 			.sticky-stage {
@@ -1359,7 +1253,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				overflow: hidden;
 			}
 
-			/* 後半背景に薄く流れる技術スタックマーキー */
 			.bg-marquee {
 				position: absolute;
 				left: 0;
@@ -1406,7 +1299,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				will-change: transform, opacity;
 			}
 
-			/* 02. Works ステージ */
 			.works-stage {
 				position: absolute;
 				inset: 0;
@@ -1520,7 +1412,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				font-size: 13px;
 			}
 
-			/* 03. Capabilities パネル */
 			.cap-panel {
 				position: absolute;
 				top: 50%;
@@ -1598,7 +1489,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				color: var(--ink-2);
 			}
 
-			/* 04. About / 05. Contact */
 			.overlay-panel {
 				position: absolute;
 				top: 50%;
@@ -1688,84 +1578,6 @@ const contactEmail = "jojosaito1809@gmail.com";
 				.cap-desc {
 					display: none;
 				}
-			}
-			#bg-motion {
-				position: absolute;
-				inset: 0;
-				width: 100%;
-				height: 100%;
-				display: block;
-				opacity: 0.9;
-			}
-			.scroll-track {
-				height: 860vh;
-			}
-
-			/* 下部HUDの見やすさ・目盛りドット */
-			.site-hud {
-				background: linear-gradient(to top, rgba(17, 17, 18, 0.85), rgba(17, 17, 18, 0));
-			}
-
-			.hud-progress-wrap {
-				position: relative;
-				display: flex;
-				align-items: center;
-				height: 20px;
-			}
-
-			.hud-progress-track {
-				width: 100%;
-				height: 2px;
-				background: rgba(240, 239, 233, 0.16);
-				border-radius: 999px;
-			}
-
-			.hud-dots {
-				position: absolute;
-				inset: 0;
-				pointer-events: none;
-			}
-
-			.hud-dot {
-				position: absolute;
-				top: 50%;
-				width: 8px;
-				height: 8px;
-				padding: 0;
-				border: 1px solid rgba(240, 239, 233, 0.45);
-				border-radius: 50%;
-				background: #111112;
-				transform: translate(-50%, -50%);
-				pointer-events: auto;
-				cursor: pointer;
-				transition:
-					transform 220ms var(--ease),
-					background-color 220ms var(--ease),
-					border-color 220ms var(--ease);
-			}
-
-			.hud-dot:hover {
-				transform: translate(-50%, -50%) scale(1.4);
-				border-color: var(--ink);
-			}
-
-			.hud-dot[data-active="true"] {
-				background: var(--ink);
-				border-color: var(--ink);
-				transform: translate(-50%, -50%) scale(1.35);
-			}
-
-			.hud-next {
-				background: rgba(240, 239, 233, 0.08);
-				border-color: rgba(240, 239, 233, 0.25);
-				transition:
-					background-color 220ms var(--ease),
-					transform 220ms var(--ease);
-			}
-
-			.hud-next:hover {
-				background: rgba(240, 239, 233, 0.16);
-				transform: translateY(-1px);
 			}
 		</style>
 	</body>

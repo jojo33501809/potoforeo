@@ -1,26 +1,20 @@
 ---
-import Base from "../layouts/Base.astro";
 ---
 
-<Base title="Page not found">
-	<section class="container empty-state">
-		<p class="display not-found__code">404</p>
-		<h1 class="display empty-state__title">Page not found</h1>
-		<p class="lead">
-			This room is empty. The page you’re looking for doesn’t exist or has moved.
-		</p>
-		<div class="actions">
-			<a href="/" class="btn btn-lg">Go home</a>
-			<a href="/contact" class="btn btn-lg btn-secondary">Contact us</a>
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>404 Not Found | 齋藤 条太郎</title>
+	</head>
+	<body style="margin:0; min-height:100vh; display:grid; place-items:center; background:#111112; color:#f0efe9; font-family:sans-serif; text-align:center;">
+		<div>
+			<p style="font-size:12px; opacity:0.5; letter-spacing:0.15em;">404 NOT FOUND</p>
+			<h1 style="font-size:24px; font-weight:500; margin:12px 0 24px;">ページが見つかりませんでした</h1>
+			<a href="/" style="color:#f0efe9; border-bottom:1px solid #f0efe9; padding-bottom:4px; text-decoration:none; font-size:14px;">
+				トップページへ戻る →
+			</a>
 		</div>
-	</section>
-</Base>
-
-<style>
-	.not-found__code {
-		font-size: clamp(120px, 22vw, 240px);
-		line-height: 0.85;
-		letter-spacing: var(--tracking-tight);
-		color: var(--color-muted);
-	}
-</style>
+	</body>
+</html>
